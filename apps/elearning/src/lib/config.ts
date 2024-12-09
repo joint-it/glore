@@ -1,54 +1,17 @@
 export default {
-  title: 'Bikappa',
-  slogan: 'Negozio a Genova e Online di Biciclette e Bici Elettriche',
-  description: `
-    BiKappa è un negozio di biciclette e bici elettriche a Genova e online in Italia.
-    Vendita di biciclette elettriche, bici elettriche, biciclette e bici in offerta, in promozione, in saldo e in sconto.
-  `,
-  url: 'https://bikappabikes.com',
-  image: '/og.png',
-  email: 'info@bikappabikes.com',
-  phone: '+393737570101',
-  colors: {
-    light: '#181818',
-    dark: '#daff00',
-    accent: '#ff0000',
+  name: 'glore',
+  title: 'GloRe',
+  slogan: 'An easy and professional way to certify your volunteering experiences',
+  description:
+    'GloRe is an open network that aims to enlarge its audience both of volunteers and NGOs all over the world to make certificates available to everybody.',
+  url: 'https://elearning.glorecertificate.new',
+  image: '/opengraph.png',
+  email: 'info@glorecertificate.net',
+  phone: '+390256568779',
+  keywords: [...new Set(['glore', 'certificate'])],
+  author: {
+    name: '@gabrielecanepa',
+    url: 'https://gabrielecanepa.com',
   },
-  keywords: [
-    ...new Set([
-      'bici elettrica',
-      'bici elettriche',
-      'bici genova',
-      'bici in offerta',
-      'bici in promozione',
-      'bici in saldo',
-      'bici in sconto',
-      'bici in vendita a genova',
-      'bici in vendita online in italia',
-      'bici in vendita online',
-      'bici in vendita online',
-      'bici in vendita',
-      'bici italia',
-      'bici offerte',
-      'bici online',
-      'bici prezzi',
-      'bici scontate',
-      'bici vendita',
-      'bici',
-      'bicicletta elettrica',
-      'biciclette elettriche',
-      'biciclette',
-      'bikappa',
-      'bikappabikes',
-      'elettriche',
-    ]),
-  ],
-  lang: 'it',
-  meta: {
-    robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-  },
-  partner: {
-    name: 'GZETA adv',
-    url: 'https://gzeta-adv.it',
-  },
+  themeColor: '#ffffff',
 }

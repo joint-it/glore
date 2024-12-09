@@ -2,44 +2,22 @@
   "name": "@repo/utils",
   "version": "0.0.0",
   "type": "module",
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
   "exports": {
-    ".": {
-      "import": {
-        "default": "./build/index.js",
-        "types": "./build/index.d.ts"
-      },
-      "require": {
-        "default": "./build/index.js",
-        "types": "./build/index.d.ts"
-      }
-    },
-    "./*": {
-      "import": {
-        "default": "./build/*.js",
-        "types": "./build/*.d.ts"
-      },
-      "require": {
-        "default": "./build/*.js",
-        "types": "./build/*.d.ts"
-      }
-    }
+    ".": "./src/index.ts",
+    "./*": "./src/lib/*.ts"
   },
   "prettier": "@repo/prettier-config",
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . && @prettier check",
-    "lint:fix": "eslint . --fix && @prettier write",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint --fix . && prettier --write .",
     "check": "pnpm run typecheck && pnpm run lint"
   },
   "dependencies": {
-    "dotenv": "^16.4.5",
     "pluralize": "^8.0.0"
   },
   "devDependencies": {
-    "@repo/bin": "workspace:^",
     "@repo/eslint-config": "workspace:^",
     "@repo/prettier-config": "workspace:^",
     "@repo/tsconfig": "workspace:^",

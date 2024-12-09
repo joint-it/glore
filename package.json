@@ -8,6 +8,7 @@
     "apps/*",
     "packages/*"
   ],
+  "type": "module",
   "packageManager": "pnpm@9.14.4",
   "prettier": "@repo/prettier-config",
   "scripts": {
@@ -22,20 +23,21 @@
     "check": "pnpm run root:check && turbo run check",
     "release": "release-it",
     "root:typecheck": "tsc --noEmit",
-    "root:lint": "eslint . && @prettier check && @shellcheck .husky",
-    "root:lint:fix": "eslint --fix . && @prettier write && @shellcheck .husky",
+    "root:lint": "eslint . && prettier --check . && shellcheck .husky",
+    "root:lint:fix": "eslint --fix . && prettier --write . && shellcheck .husky",
     "root:check": "pnpm run root:typecheck && pnpm run root:lint"
   },
-  "dependencies": {
+  "devDependencies": {
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",
     "@commitlint/types": "^19.5.0",
     "@release-it/bumper": "^6.0.1",
     "@release-it/conventional-changelog": "^9.0.3",
-    "@repo/bin": "workspace:^",
     "@repo/eslint-config": "workspace:^",
     "@repo/prettier-config": "workspace:^",
+    "@repo/shellcheck": "workspace:^",
     "@repo/tsconfig": "workspace:^",
+    "@types/node": "^22.10.1",
     "eslint": "catalog:",
     "husky": "^9.1.7",
     "prettier": "catalog:",
@@ -43,8 +45,5 @@
     "release-it-pnpm": "^4.6.3",
     "turbo": "^2.3.0",
     "typescript": "catalog:"
-  },
-  "devDependencies": {
-    "@types/node": "^22.10.1"
   }
 }

@@ -2,6 +2,8 @@ import { cloneElement, forwardRef } from 'react'
 
 import { Group, InputElement, type BoxProps, type InputElementProps } from '@chakra-ui/react'
 
+import { normalizeSpacing } from '@/lib/utils'
+
 export interface InputGroupProps extends BoxProps {
   startElementProps?: InputElementProps
   endElementProps?: InputElementProps
@@ -33,9 +35,9 @@ export const InputGroup = forwardRef<HTMLDivElement, InputGroupProps>((props, re
       )}
       {cloneElement(children, {
         ...(startElement && {
-          ps: `calc(var(--input-height) - ${startOffset})`,
+          ps: `calc(var(--input-height) - ${normalizeSpacing(startOffset)})`,
         }),
-        ...(endElement && { pe: `calc(var(--input-height) - ${endOffset})` }),
+        ...(endElement && { pe: `calc(var(--input-height) - ${normalizeSpacing(endOffset)})` }),
         ...(children.props || {}),
       })}
       {endElement && (

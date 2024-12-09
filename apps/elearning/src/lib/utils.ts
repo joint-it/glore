@@ -10,3 +10,11 @@ import { redirect } from 'next/navigation'
  */
 export const encodedRedirect = (type: 'error' | 'success', path: string, message: string) =>
   redirect(`${path}?${type}=${encodeURIComponent(message)}`)
+
+/**
+ * Parses a value as a string if it is a string or a number, otherwise returns "0".
+ */
+export const normalizeSpacing = (value: any) => {
+  if (typeof value === 'string' || typeof value === 'number') return String(value)
+  return '0'
+}

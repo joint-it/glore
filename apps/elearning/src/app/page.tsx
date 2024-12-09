@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-const Home = async () => (
+const Home = () => (
   <main lang="en">
     <h1>{'Welcome!'}</h1>
     <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">

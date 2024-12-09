@@ -1,14 +1,15 @@
 {
   "name": "elearning",
   "version": "0.0.0",
+  "type": "module",
   "prettier": "@repo/prettier-config",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . && @prettier check",
-    "lint:fix": "eslint . --fix && @prettier write",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint --fix . && prettier --write .",
     "check": "pnpm run typecheck && pnpm run lint",
     "component": "@component",
     "analyze": "ANALYZE=true next build"
@@ -16,6 +17,9 @@
   "dependencies": {
     "@chakra-ui/react": "^3.2.3",
     "@emotion/react": "^11.13.5",
+    "@repo/utils": "workspace:^",
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.47.2",
     "million": "^3.1.11",
     "next": "^15.0.4",
     "next-themes": "^0.4.4",
@@ -26,7 +30,6 @@
   "devDependencies": {
     "@chakra-ui/cli": "^3.2.3",
     "@next/bundle-analyzer": "^15.0.4",
-    "@repo/bin": "workspace:^",
     "@repo/eslint-config": "workspace:^",
     "@repo/prettier-config": "workspace:^",
     "@repo/tsconfig": "workspace:^",

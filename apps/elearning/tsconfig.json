@@ -6,6 +6,14 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "plugins": [
+      {
+        "transform": "ts-transformer-keys/transformer"
+      },
+      {
+        "name": "next"
+      }
+    ]
   }
 }

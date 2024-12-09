@@ -46,5 +46,6 @@
     "*.tsx": "typescriptreact"
   },
   "html.format.indentInnerHtml": true,
-  "html.format.unformatted": "html,style"
+  "html.format.unformatted": "html,style",
+  "prettier.ignorePath": ""
 }

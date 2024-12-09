@@ -3,7 +3,6 @@ packages:
   - packages/*
 
 catalog:
-  "@types/node": ^22.10.1
   eslint: ^9.16.0
   prettier: ^3.4.2
   typescript: ^5.7.2

@@ -1,19 +1,19 @@
 {
   "name": "@repo/types",
   "version": "0.0.0",
+  "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./*": "./src/lib/*"
+    "./*": "./src/lib/*.ts"
   },
   "prettier": "@repo/prettier-config",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . && @prettier check",
-    "lint:fix": "eslint . --fix && @prettier write",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint --fix . && prettier --write .",
     "check": "pnpm run typecheck && pnpm run lint"
   },
   "dependencies": {
-    "@repo/bin": "workspace:^",
     "@repo/eslint-config": "workspace:^",
     "@repo/prettier-config": "workspace:^",
     "@repo/tsconfig": "workspace:^",

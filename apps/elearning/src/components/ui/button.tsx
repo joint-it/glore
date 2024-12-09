@@ -8,7 +8,7 @@ import {
   type ButtonProps as ChakraButtonProps,
 } from '@chakra-ui/react'
 
-interface ButtonLoadingProps {
+export interface ButtonLoadingProps {
   loading?: boolean
   loadingText?: React.ReactNode
 }

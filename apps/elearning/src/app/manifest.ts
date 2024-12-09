@@ -9,8 +9,8 @@ export default () =>
     description: config.description,
     start_url: '/',
     display: 'standalone',
-    background_color: config.colors.light,
-    theme_color: config.colors.dark,
+    background_color: config.themeColor,
+    theme_color: config.themeColor,
     icons: [
       {
         src: '/web-app-manifest-192x192.png',

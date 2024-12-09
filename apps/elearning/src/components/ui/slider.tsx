@@ -17,7 +17,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
     return mark
   })
 
-  const hasMarkLabel = !!marks?.some(mark => mark.label)
+  const hasMarkLabel = marks?.some(mark => !!mark.label)
 
   return (
     <ChakraSlider.Root ref={ref} thumbAlignment="center" {...rest}>

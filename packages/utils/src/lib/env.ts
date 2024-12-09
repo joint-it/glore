@@ -1,5 +1,3 @@
-import 'dotenv/config'
-
 /**
  * Error thrown when an environment variable is not defined.
  */
@@ -14,7 +12,7 @@ export class EnvError extends Error {
  * Get the value of an environment variable or throw an error if not defined.
  */
 export const env = (key: string, defaultValue?: any): string => {
-  const value = process.env[key] || defaultValue
+  const value = process.env[key] || (defaultValue as string)
   if (!value) throw new EnvError(key)
   return String(value)
 }
