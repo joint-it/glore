@@ -1,7 +1,16 @@
-import { type JSX } from 'react'
+// eslint-disable-next-line no-restricted-imports
+import type en from '../../translations/en.json'
 
-export interface Component<T extends React.HTMLAttributes<HTMLElement>> {
-  (props: T): JSX.Element
+type Messages = typeof en
+
+declare global {
+  interface IntlMessages extends Messages {}
 }
 
-export type NestedComponent<T, U extends Record<string, any>> = T & U
+export interface AnyObject {
+  [key: string]: any
+}
+
+export type SetDifference<A, B> = A extends B ? never : A
+
+export type Diff<T extends object, U extends object> = Pick<T, SetDifference<keyof T, keyof U>>

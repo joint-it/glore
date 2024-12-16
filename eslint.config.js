@@ -1,4 +1,4 @@
-import { configTypescript, sortImports, withIgnores } from '@repo/eslint-config'
+import { configTypescript, sortImports, withIgnores } from '@glore/eslint-config'
 
 /**
  * @type {import('eslint').Linter.Config[]}

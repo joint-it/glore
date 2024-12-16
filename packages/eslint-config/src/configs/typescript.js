@@ -4,10 +4,15 @@ import typescript from 'typescript-eslint'
 import configBase from './base.js'
 
 /**
+ * @typedef {import('eslint').Linter.Config[]} ConfigTypescript
+ * @typedef {import('../utils').ConfigOptions} ConfigTypescriptOptions
+ */
+
+/**
  * Custom ESLint configuration for TypeScript projects.
  *
- * @param {import('../utils.js').ConfigOptions} options - Options for the configuration.
- * @return {import('eslint').Linter.Config[]}
+ * @param {ConfigTypescriptOptions} options - Options for the configuration.
+ * @return {ConfigTypescript}
  */
 const configTypescript = (options = {}) => [
   ...configBase(options),
@@ -58,6 +63,10 @@ const configTypescript = (options = {}) => [
         ],
         '@typescript-eslint/no-explicit-any': 0,
         '@typescript-eslint/no-namespace': 0,
+        '@typescript-eslint/no-non-null-assertion': 0,
+        '@typescript-eslint/no-unsafe-assignment': 0,
+        '@typescript-eslint/no-unsafe-call': 0,
+        '@typescript-eslint/no-unsafe-member-access': 0,
         '@typescript-eslint/no-unused-vars': [
           2,
           {
@@ -66,7 +75,14 @@ const configTypescript = (options = {}) => [
         ],
         '@typescript-eslint/no-useless-empty-export': 2,
         '@typescript-eslint/prefer-for-of': 2,
+        '@typescript-eslint/prefer-reduce-type-parameter': 0,
         '@typescript-eslint/prefer-string-starts-ends-with': 2,
+        '@typescript-eslint/restrict-template-expressions': [
+          2,
+          {
+            allowNumber: true,
+          },
+        ],
       },
     },
     {

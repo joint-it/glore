@@ -8,54 +8,53 @@ import sortDestructureKeysPlugin from 'eslint-plugin-sort-destructure-keys'
 import sortKeysPlugin from 'eslint-plugin-sort-keys-fix'
 import unusedImportsPlugin from 'eslint-plugin-unused-imports'
 
-import deepMerge from 'deepmerge'
-
 import repoPlugin from '../plugins/repo.js'
-import { noRestrictedImports, sortImports } from '../utils.js'
+import { mergeConfigOptions, noRestrictedImports, sortImports } from '../utils.js'
 
 /**
- * Default options for the base configuration.
- *
- * @type {import('../utils.js').ConfigOptions}
+ * @typedef {import('eslint').Linter.Config[]} ConfigBase
+ * @typedef {import('../utils').ConfigOptions} ConfigBaseOptions
  */
+
+/** @type {ConfigBaseOptions} */
 export const CONFIG_BASE_OPTIONS = {
-  include: [],
+  include: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
   imports: {
     named: ['node:*'],
     restricted: [],
     external: [],
-    internal: ['@repo'],
-    allowRelative: 'siblings',
+    internal: ['@glore'],
+    allowRelative: 'ignore',
+    newlinesBetween: 'always',
     newlinesBetweenExternals: true,
     newlinesBetweenInternals: true,
     useNodePrefix: 'always',
     sortImportsOptions: {
-      newlinesBetween: 'always',
       sortSideEffects: true,
     },
   },
+  sortArrayValues: [],
   sortKeys: [],
 }
 
 /**
  * Function returning a custom base ESLint configuration.
  *
- * @param {import('../utils.js').ConfigOptions} options - Options for the configuration.
- * @return {import('eslint').Linter.Config[]}
+ * @param {ConfigBaseOptions} options - Options for the configuration.
+ * @return {ConfigBase}
  */
 const configBase = (options = {}) => {
-  const opts = deepMerge(CONFIG_BASE_OPTIONS, options)
+  const opts = mergeConfigOptions(CONFIG_BASE_OPTIONS, options)
 
-  /**
-   * @type {import('eslint').Linter.Config[]}
-   */
+  /** @type {ConfigBase} */
   return [
     gitignoreConfig(),
     repoPlugin.configs.default,
     {
       name: 'base',
+      files: opts.include,
       plugins: {
-        '@repo': repoPlugin,
+        '@glore': repoPlugin,
         '@stylistic': stylisticPlugin,
         '@stylistic/ts': stylisticTsPlugin,
         perfectionist: perfectionistPlugin,
@@ -123,6 +122,7 @@ const configBase = (options = {}) => {
           2,
           {
             code: 140,
+            ignoreStrings: true,
             ignoreUrls: true,
           },
         ],
@@ -185,6 +185,14 @@ const configBase = (options = {}) => {
         'unused-imports/no-unused-imports': 2,
       },
     },
+    opts.sortArrayValues?.length
+      ? {
+          files: opts.sortArrayValues,
+          rules: {
+            '@glore/sort-array-values': 2,
+          },
+        }
+      : {},
     opts.sortKeys?.length
       ? {
           files: opts.sortKeys,

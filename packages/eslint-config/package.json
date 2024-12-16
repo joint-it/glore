@@ -1,5 +1,5 @@
 {
-  "name": "@repo/eslint-config",
+  "name": "@glore/eslint-config",
   "version": "0.0.0",
   "type": "module",
   "main": "./src/index.js",
@@ -13,7 +13,7 @@
     "lint:fix": "eslint --fix .",
     "check": "pnpm run lint"
   },
-  "dependencies": {
+  "devDependencies": {
     "@eslint/js": "^9.16.0",
     "@next/eslint-plugin-next": "^15.0.4",
     "@stylistic/eslint-plugin": "^2.10.1",
@@ -21,17 +21,15 @@
     "deepmerge": "^4.3.1",
     "eslint": "catalog:",
     "eslint-config-flat-gitignore": "^0.3.0",
+    "eslint-import-resolver-typescript": "^3.7.0",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-next": "^0.0.0",
     "eslint-plugin-perfectionist": "^4.1.2",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-sort-destructure-keys": "^2.0.0",
+    "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-unused-imports": "^4.1.4",
     "typescript-eslint": "^8.12.2"
-  },
-  "devDependencies": {
-    "eslint-plugin-sort-keys-fix": "^1.1.2"
   }
 }

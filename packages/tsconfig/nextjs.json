@@ -1,15 +1,12 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "./base.json",
+  "extends": "./react-dom.json",
   "display": "Next.js",
   "compilerOptions": {
-    "incremental": true,
-    "noEmit": true,
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "types": ["react", "react-dom"]
+    ]
   }
 }

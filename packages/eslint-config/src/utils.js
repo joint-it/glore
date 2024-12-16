@@ -12,13 +12,16 @@ import deepMerge from 'deepmerge'
  *    restricted?: string[] | { group: string[], message?: string }[]
  *    external?: string[]
  *    internal?: string[]
+ *    customGroups?: string[]
  *    allowRelative?: 'ignore' | 'siblings' | 'never'
+ *    newlinesBetween?: 'ignore' | 'always' | 'never'
  *    newlinesBetweenExternals: boolean
  *    newlinesBetweenInternals: boolean
  *    useNodePrefix?: 'ignore' | 'always' | 'never'
  *    noRestrictedImportsOptions?: Record<string, any>
  *    sortImportsOptions?: Record<string, any>
  *  }
+ *  sortArrayValues?: string[]
  *  sortKeys?: string[]
  * }} ConfigOptions
  */
@@ -34,7 +37,9 @@ export const DEFAULT_CONFIG_OPTIONS = {
     restricted: [],
     external: [],
     internal: [],
+    customGroups: [],
     allowRelative: 'ignore',
+    newlinesBetween: 'ignore',
     newlinesBetweenExternals: false,
     newlinesBetweenInternals: false,
     useNodePrefix: 'ignore',
@@ -44,7 +49,17 @@ export const DEFAULT_CONFIG_OPTIONS = {
     },
   },
   sortKeys: [],
+  sortArrayValues: [],
 }
+
+/**
+ * Merges two options objects.
+ *
+ * @param {ConfigOptions} x - First options object.
+ * @param {ConfigOptions} y - Second options object.
+ * @return {ConfigOptions} Merged options object.
+ */
+export const mergeConfigOptions = (x, y) => deepMerge(x, y)
 
 /**
  * Builds import options for the `no-restricted-imports` rule using custom imports.
@@ -55,10 +70,10 @@ export const DEFAULT_CONFIG_OPTIONS = {
  * @see {@link https://eslint.org/docs/rules/no-restricted-imports}
  */
 export const noRestrictedImports = (imports = {}) => {
-  const { allowRelative, named, noRestrictedImportsOptions, restricted, useNodePrefix } = deepMerge(
-    DEFAULT_CONFIG_OPTIONS.imports,
-    imports,
-  )
+  const { allowRelative, named, noRestrictedImportsOptions, restricted, useNodePrefix } = mergeConfigOptions(
+    DEFAULT_CONFIG_OPTIONS,
+    { imports },
+  ).imports
 
   const rule = {
     paths: named.map(name => ({
@@ -117,12 +132,14 @@ export const sortImports = (imports = {}) => {
   const {
     external = [],
     internal = [],
+    customGroups: groups,
+    newlinesBetween,
     newlinesBetweenExternals,
     newlinesBetweenInternals,
     sortImportsOptions,
-  } = deepMerge(DEFAULT_CONFIG_OPTIONS.imports, imports)
+  } = mergeConfigOptions(DEFAULT_CONFIG_OPTIONS, { imports }).imports
 
-  const customGroups = [...external, ...internal].reduce((groups, name) => {
+  const customGroups = [...external, ...internal, ...groups].reduce((groups, name) => {
     const regexName = name.replace('*', '.*')
     const patterns = [new RegExp(`^${regexName}$`), new RegExp(`^${regexName}/.*`)]
 
@@ -137,23 +154,21 @@ export const sortImports = (imports = {}) => {
       },
     }
   }, {})
-
   const externalGroup = newlinesBetweenExternals ? [external, 'external'] : [['external', ...external]]
   const internalGroup = newlinesBetweenInternals ? [internal, 'internal'] : [['internal', ...internal]]
 
-  return deepMerge(
-    {
-      groups: [
-        ['side-effect', 'side-effect-style'],
-        'builtin',
-        ...externalGroup,
-        ...internalGroup,
-        ['parent', 'index', 'sibling'],
-      ],
-      customGroups,
-    },
-    sortImportsOptions,
-  )
+  return {
+    groups: [
+      ['side-effect', 'side-effect-style'],
+      'builtin',
+      ...externalGroup,
+      ...internalGroup,
+      ['parent', 'index', 'sibling'],
+    ],
+    customGroups,
+    newlinesBetween,
+    ...sortImportsOptions,
+  }
 }
 
 /**

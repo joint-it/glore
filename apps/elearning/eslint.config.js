@@ -1,18 +1,12 @@
-import { configNextjs } from '@repo/eslint-config'
+import { configNextjs } from '@glore/eslint-config'
 
 /**
  * @type {import('eslint').Linter.Config[]}
  */
-export default [
-  ...configNextjs(
-    {
-      sortKeys: ['src/app/meta.ts'],
-    },
-  ),
-  {
-    files: ['src/lib/config.ts'],
-    rules: {
-      '@stylistic/max-len': 0,
-    }
-  }
-]
+export default configNextjs({
+  sortArrayValues: ['src/**/*.ts?(x)'],
+  sortKeys: ['src/**/*.ts?(x)'],
+  imports: {
+    newlinesBetweenInternals: false,
+  },
+})
