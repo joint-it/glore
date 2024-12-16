@@ -1,39 +1,27 @@
 import { NextResponse, type NextRequest } from 'next/server'
 
-import { createServerClient } from '@supabase/ssr'
-
-import Env from '@/lib/env'
+import { createClient } from '@/db/server'
 
 export const updateSession = async (request: NextRequest) => {
-  let response = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  })
-
-  const supabase = createServerClient(Env.SUPABASE_URL, Env.SUPABASE_ANON_KEY, {
-    cookies: {
-      getAll: () => request.cookies.getAll(),
-      setAll: cookies => {
-        for (const { name, value } of cookies) {
-          request.cookies.set(name, value)
-        }
-        response = NextResponse.next({ request })
-        for (const { name, value, options } of cookies) {
-          response.cookies.set(name, value, options)
-        }
+  try {
+    let response = NextResponse.next({
+      request: {
+        headers: request.headers,
       },
-    },
-  })
+    })
 
-  const user = await supabase.auth.getUser()
+    const db = await createClient(() => {
+      response = NextResponse.next({ request })
+    })
 
-  if (request.nextUrl.pathname.startsWith('/protected') && user.error) {
-    return NextResponse.redirect(new URL('/sign-in', request.url))
+    const { error } = await db.auth.getUser()
+
+    return error ? NextResponse.redirect(new URL('/login', request.url)) : response
+  } catch {
+    return NextResponse.next({
+      request: {
+        headers: request.headers,
+      },
+    })
   }
-  if (request.nextUrl.pathname === '/' && !user.error) {
-    return NextResponse.redirect(new URL('/protected', request.url))
-  }
-
-  return response
 }

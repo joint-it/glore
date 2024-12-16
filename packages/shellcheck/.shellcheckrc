@@ -1,5 +1,0 @@
-# https://shellcheck.net/wiki
-external-sources=true
-disable=SC2048
-disable=SC2086
-disable=SC3009

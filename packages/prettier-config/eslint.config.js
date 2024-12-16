@@ -1,10 +1,10 @@
-import { configBase } from '@repo/eslint-config'
+import { configPackage } from '@glore/eslint-config'
 
 /**
  * @type {import('eslint').Linter.Config[]}
  */
 export default [
-  ...configBase(),
+  ...configPackage(),
   {
     rules: {
       'import/no-useless-path-segments': 0,

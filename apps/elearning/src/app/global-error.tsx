@@ -1,10 +1,6 @@
 'use client'
 
-export interface GlobalErrorProps {
-  reset: () => void
-}
-
-const GlobalError = ({ reset }: GlobalErrorProps) => (
+export default ({ reset }: { reset: () => void }) => (
   <html>
     <body>
       <h2>{'Something went wrong!'}</h2>
@@ -18,5 +14,3 @@ const GlobalError = ({ reset }: GlobalErrorProps) => (
     </body>
   </html>
 )
-
-export default GlobalError

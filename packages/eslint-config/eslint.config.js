@@ -1,10 +1,10 @@
-import { configBase } from './src/index.js'
+import { configPackage } from './src/index.js'
 
 /**
  * @type {import('eslint').Linter.Config[]}
  */
 export default [
-  ...configBase({
+  ...configPackage({
     imports: {
       internal: ['deepmerge'],
     },

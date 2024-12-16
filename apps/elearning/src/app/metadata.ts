@@ -1,6 +1,7 @@
 import { type Metadata } from 'next'
 
 import config from '@/lib/config'
+import Env from '@/lib/env'
 
 const { author, description, email, image, phone, slogan, title, url } = config
 
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   },
   applicationName: title,
   authors: author,
-  category: 'Shopping',
+  category: 'Education',
   creator: author.name,
   icons: [
     {
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     },
   ],
   manifest: '/site.webmanifest',
-  robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+  metadataBase: new URL(Env.URL),
   openGraph: {
     alternateLocale: 'en_US',
     countryName: 'Italy',
@@ -49,5 +50,6 @@ export const metadata: Metadata = {
     ttl: 60,
     url,
   },
+  robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
   title: `${title} - ${slogan}`,
 }

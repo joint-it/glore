@@ -1,4 +1,3 @@
-import { browserClient, serverClient } from '@/db/client'
+import { createClient } from '@/db/server'
 
-export const useDB = async (environment: 'browser' | 'server' = 'server') =>
-  await (environment === 'browser' ? browserClient() : serverClient())
+export const useDB = createClient

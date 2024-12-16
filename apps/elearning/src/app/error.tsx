@@ -7,7 +7,7 @@ export interface ErrorProps {
   reset: () => void
 }
 
-const Error = ({ error, reset }: ErrorProps) => {
+export default ({ error, reset }: ErrorProps) => {
   useEffect(() => {
     console.error(error)
   }, [error])
@@ -25,5 +25,3 @@ const Error = ({ error, reset }: ErrorProps) => {
     </div>
   )
 }
-
-export default Error

@@ -1,19 +1,11 @@
 {
-  "extends": "@repo/tsconfig/nextjs",
-  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next-env.d.ts"],
+  "extends": "@glore/tsconfig/nextjs",
+  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next-env.d.ts", "next.config.js"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    },
-    "plugins": [
-      {
-        "transform": "ts-transformer-keys/transformer"
-      },
-      {
-        "name": "next"
-      }
-    ]
+    }
   }
 }

@@ -1,6 +1,7 @@
 {
-  "name": "@repo/tsconfig",
+  "name": "@glore/tsconfig",
   "version": "0.0.0",
+  "main": "base.json",
   "files": [
     "base.json",
     "nextjs.json"
@@ -9,14 +10,14 @@
     ".": "./base.json",
     "./*": "./*.json"
   },
-  "prettier": "@repo/prettier-config",
+  "prettier": "@glore/prettier-config",
   "scripts": {
     "lint": "prettier --check .",
     "lint:fix": "prettier --write .",
     "check": "pnpm run lint"
   },
-  "dependencies": {
-    "@repo/prettier-config": "workspace:^",
+  "devDependencies": {
+    "@glore/prettier-config": "workspace:^",
     "prettier": "catalog:"
   }
 }

@@ -13,26 +13,22 @@ jobs:
     env:
       SHELLCHECKJS_LOGGER_LEVEL: warn
       TURBO_TELEMETRY_DISABLED: true
-      TURBO_UI: false
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          run_install: true
+      - run: corepack enable
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-          cache: pnpm
-      - name: Add `node_modules` binaries to `PATH`
-        run: echo ./node_modules/.bin >> $GITHUB_PATH
+      - run: corepack install
+      - name: Run pnpm install
+        run: |
+          pnpm install --recursive
+          pnpm build
+          echo ./node_modules/.bin >> $GITHUB_PATH
       - name: Run commitlint on push
-        if: github.event_name == 'push' && !github.event.forced && github.event.before != 0000000000000000000000000000000000000000
-        run: commitlint --from ${{ github.event.before }} --to ${{ github.event.after }} --verbose
-      - name: Run commitlint on forced push
-        if: github.event_name == 'push' && github.event.forced
+        if: github.event_name == 'push'
         run: commitlint --last --verbose
       - name: Run commitlint on pull request
         if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]'
         run: commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
-      - name: Run checks
-        run: pnpm run check
+      - run: pnpm check

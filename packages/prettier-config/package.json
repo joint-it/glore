@@ -1,5 +1,5 @@
 {
-  "name": "@repo/prettier-config",
+  "name": "@glore/prettier-config",
   "version": "0.0.0",
   "type": "module",
   "main": "./src/index.js",
@@ -9,8 +9,8 @@
     "lint:fix": "eslint --fix . && prettier --write .",
     "check": "pnpm run lint"
   },
-  "dependencies": {
-    "@repo/eslint-config": "workspace:^",
+  "devDependencies": {
+    "@glore/eslint-config": "workspace:^",
     "eslint": "catalog:",
     "prettier": "catalog:"
   }
