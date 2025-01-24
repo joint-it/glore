@@ -44,6 +44,7 @@
   "html.format.unformatted": "html,style",
   "prettier.ignorePath": "",
   "search.useIgnoreFiles": true,
+  "tailwindCSS.experimental.classRegex": [["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]],
   "workbench.colorCustomizations": {
     "titleBar.activeBackground": "#96a24a",
     "titleBar.activeForeground": "#ffffff",

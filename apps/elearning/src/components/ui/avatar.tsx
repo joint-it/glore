@@ -11,7 +11,7 @@ export interface AvatarProps extends React.ComponentPropsWithoutRef<typeof Avata
 export const Avatar = forwardRef<React.ComponentRef<typeof AvatarPrimitive.Root>, AvatarProps>(
   ({ className, ...props }, ref) => (
     <AvatarPrimitive.Root
-      className={cn('rounded-full relative flex h-10 w-10 shrink-0 overflow-hidden', className)}
+      className={cn('relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full', className)}
       ref={ref}
       {...props}
     />
@@ -31,7 +31,7 @@ export interface AvatarFallbackProps extends React.ComponentPropsWithoutRef<type
 export const AvatarFallback = forwardRef<React.ComponentRef<typeof AvatarPrimitive.Fallback>, AvatarFallbackProps>(
   ({ className, ...props }, ref) => (
     <AvatarPrimitive.Fallback
-      className={cn('rounded-full flex h-full w-full items-center justify-center bg-muted', className)}
+      className={cn('flex h-full w-full items-center justify-center rounded-full bg-muted', className)}
       ref={ref}
       {...props}
     />

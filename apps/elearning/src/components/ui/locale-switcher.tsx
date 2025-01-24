@@ -44,7 +44,7 @@ export const LocaleSwitcher = (props: LocaleSwitcherProps) => {
     <Select defaultValue={locale} onValueChange={onChange} {...props}>
       <Select.Trigger
         className={cn(
-          'hover:bg-slate-200 rounded-sm p-2 transition-colors',
+          'rounded-sm p-2 transition-colors hover:bg-slate-200',
           isPending && 'pointer-events-none opacity-60',
         )}
       >
@@ -54,12 +54,12 @@ export const LocaleSwitcher = (props: LocaleSwitcherProps) => {
       </Select.Trigger>
       <Select.Content
         align="end"
-        className="bg-white min-w-[8rem] overflow-hidden rounded-sm py-1 shadow-md"
+        className="min-w-[8rem] overflow-hidden rounded-sm bg-white py-1 shadow-md"
         position="popper"
       >
         {items.map(item => (
           <Select.Item
-            className="data-[highlighted]:bg-slate-100 flex cursor-default items-center px-3 py-2 text-base"
+            className="flex cursor-default items-center px-3 py-2 text-base data-highlighted:bg-slate-100"
             key={item.value}
             value={item.value}
           >
