@@ -250,67 +250,6 @@ importers:
         specifier: 'catalog:'
         version: 3.4.2
 
-  packages/types:
-    devDependencies:
-      '@glore/eslint-config':
-        specifier: workspace:^
-        version: link:../eslint-config
-      '@glore/prettier-config':
-        specifier: workspace:^
-        version: link:../prettier-config
-      '@glore/tsconfig':
-        specifier: workspace:^
-        version: link:../tsconfig
-      '@types/react':
-        specifier: ^19.0.0
-        version: 19.0.1
-      eslint:
-        specifier: 'catalog:'
-        version: 9.16.0(jiti@1.21.6)
-      prettier:
-        specifier: 'catalog:'
-        version: 3.4.2
-      typescript:
-        specifier: 'catalog:'
-        version: 5.7.2
-
-  packages/utils:
-    dependencies:
-      pluralize:
-        specifier: ^8.0.0
-        version: 8.0.0
-    devDependencies:
-      '@glore/eslint-config':
-        specifier: workspace:^
-        version: link:../eslint-config
-      '@glore/prettier-config':
-        specifier: workspace:^
-        version: link:../prettier-config
-      '@glore/tsconfig':
-        specifier: workspace:^
-        version: link:../tsconfig
-      '@glore/types':
-        specifier: workspace:^
-        version: link:../types
-      '@types/node':
-        specifier: ^22.10.7
-        version: 22.10.7
-      '@types/pluralize':
-        specifier: ^0.0.33
-        version: 0.0.33
-      csstype:
-        specifier: ^3.1.3
-        version: 3.1.3
-      eslint:
-        specifier: 'catalog:'
-        version: 9.16.0(jiti@1.21.6)
-      prettier:
-        specifier: 'catalog:'
-        version: 3.4.2
-      typescript:
-        specifier: 'catalog:'
-        version: 5.7.2
-
 packages:
 
   '@alloc/quick-lru@5.2.0':
@@ -1406,9 +1345,6 @@ packages:
 
   '@types/phoenix@1.6.6':
     resolution: {integrity: sha512-PIzZZlEppgrpoT2QgbnDU+MMzuR6BbCjllj0bM70lWoejMeNJAxCchxnv7J3XFkI8MpygtRpzXrIlmWUBclP5A==}
-
-  '@types/pluralize@0.0.33':
-    resolution: {integrity: sha512-JOqsl+ZoCpP4e8TDke9W79FDcSgPAR0l6pixx2JHkhnRjvShyYiAYw2LVsnA7K08Y6DeOnaU6ujmENO4os/cYg==}
 
   '@types/react-dom@19.0.1':
     resolution: {integrity: sha512-hljHij7MpWPKF6u5vojuyfV0YA4YURsQG7KT6SzV0Zs2BXAtgdTxG6A229Ub/xiWV4w/7JL8fi6aAyjshH4meA==}
@@ -3806,10 +3742,6 @@ packages:
   pkg-types@1.2.1:
     resolution: {integrity: sha512-sQoqa8alT3nHjGuTjuKgOnvjo4cljkufdtLMnO2LBP/wRwuDlo1tkaEdMxCRhyGRPacv/ztlZgDPm2b7FAmEvw==}
 
-  pluralize@8.0.0:
-    resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
-    engines: {node: '>=4'}
-
   possible-typed-array-names@1.0.0:
     resolution: {integrity: sha512-d7Uw+eZoloe0EHDIYoe+bQ5WXnGMOpmiZFTuMWCwpjzzkL2nTjcKiAk4hh8TjnGye2TwWOk3UXucZ+3rbmBa8Q==}
     engines: {node: '>= 0.4'}
@@ -5997,8 +5929,6 @@ snapshots:
   '@types/normalize-package-data@2.4.4': {}
 
   '@types/phoenix@1.6.6': {}
-
-  '@types/pluralize@0.0.33': {}
 
   '@types/react-dom@19.0.1':
     dependencies:
@@ -8584,8 +8514,6 @@ snapshots:
       confbox: 0.1.8
       mlly: 1.7.3
       pathe: 1.1.2
-
-  pluralize@8.0.0: {}
 
   possible-typed-array-names@1.0.0: {}
 
