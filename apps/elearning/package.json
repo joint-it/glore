@@ -3,15 +3,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "build:watch": "next build --watch",
-    "start": "next start --port 3333",
+    "start": "next start",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . && prettier --check .",
     "lint:fix": "eslint --fix . && prettier --write .",
     "check": "pnpm run typecheck && pnpm run lint",
-    "component": "@component",
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
@@ -45,9 +44,9 @@
     "autoprefixer": "^10.4.20",
     "eslint": "catalog:",
     "postcss": "^8.5.1",
+    "postcss-load-config": "^6.0.1",
     "prettier": "catalog:",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "shadcn": "^2.1.8",
     "tailwindcss": "^4.0.0",
     "typescript": "catalog:"
   }

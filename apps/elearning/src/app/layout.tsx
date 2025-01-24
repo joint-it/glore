@@ -11,11 +11,11 @@ export default async ({ children }: React.PropsWithChildren) => {
   const messages = await getMessages()
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
-            <div className="absolute bottom-8 right-8 z-50">
+            <div className="absolute right-8 bottom-8 z-50">
               <LocaleSwitcher />
             </div>
             {children}

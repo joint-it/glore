@@ -1,4 +1,3 @@
-import { Image } from '@/components/ui'
 import { GalleryVerticalEndIcon } from '@/components/ui/icons'
 
 export default ({ children }: React.PropsWithChildren) => (
@@ -16,12 +15,6 @@ export default ({ children }: React.PropsWithChildren) => (
         <div className="w-full max-w-xs">{children}</div>
       </div>
     </div>
-    <div className="relative hidden bg-muted lg:block">
-      <Image
-        alt="Image"
-        className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-        src="/placeholder.svg"
-      />
-    </div>
+    <div className="relative hidden bg-muted lg:block"></div>
   </div>
 )
