@@ -39,6 +39,7 @@
     "@glore/prettier-config": "workspace:^",
     "@glore/tsconfig": "workspace:^",
     "@next/bundle-analyzer": "^15.0.4",
+    "@tailwindcss/postcss": "^4.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "autoprefixer": "^10.4.20",
