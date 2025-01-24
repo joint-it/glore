@@ -1,8 +1,8 @@
 <div align="center">
-  <img src=".github/static/glore.png" alt="" width="90" />
+  <img src="https://raw.githubusercontent.com/jointorg/glore/refs/heads/main/.github/static/glore.png" alt="" width="90" />
   <h1>GloRe eLearning</h1>
-  <a href="https://github.com/jointorg/glore/actions/workflows/validate-commits.yml">
-    <img src="https://github.com/jointorg/glore/actions/workflows/validate-commits.yml/badge.svg" />
+  <a href="https://github.com/jointorg/glore/actions/workflows/code-quality.yml">
+    <img src="https://github.com/jointorg/glore/actions/workflows/code-quality.yml/badge.svg" />
   </a>
 </div>
 
@@ -12,9 +12,9 @@ Visit the website to find out how to sign up to the e-learning platform and get 
 
 ## About
 
-The GloRe eLearning platform is a monorepository including a <a href="https://nextjs.org"><img src=".github/static/next-js.svg" style="height: 12px; margin-right: 2px;">Next.js</a> application backed by <a href="https://supabase.com"><img src=".github/static/supabase.svg" style="height: 12px">Supabase</a> and different utility packages.
+The GloRe eLearning platform is a monorepository including a <a href="https://nextjs.org"><img src="https://raw.githubusercontent.com/jointorg/glore/refs/heads/main/.github/static/next-js.svg" style="height: 12px; margin-right: 2px;">Next.js</a> application backed by <a href="https://supabase.com"><img src="https://raw.githubusercontent.com/jointorg/glore/refs/heads/main/.github/static/supabase.svg" style="height: 12px">Supabase</a> and different utility packages.
 
-The project uses <a href="https://tailwindcss.com"><img src=".github/static/tailwind.svg" style="height: 12px">Tailwind CSS</a> and <a href="https://ui.shadcn.com"><img src=".github/static/shadcn.png" style="height: 12px">shadcn/ui</a> components for building the user interface.
+The project uses <a href="https://tailwindcss.com"><img src="https://raw.githubusercontent.com/jointorg/glore/refs/heads/main/.github/static/tailwind.svg" style="height: 10px">Tailwind CSS</a> and <a href="https://ui.shadcn.com"><img src="https://raw.githubusercontent.com/jointorg/glore/refs/heads/main/.github/static/shadcn.png" style="height: 12px">shadcn/ui</a> components for building the user interface.
 
 ## Contributing
 
@@ -22,7 +22,7 @@ If you want to contribute to the project, follow the instructions below to set u
 
 ### Prerequisites
 
-You must download and activate the Node.js version specified [here](.node-version).
+You must download and activate the Node.js version specified [here](https://github.com/francojoint/glore/blob/main/.node-version).
 
 ### Installation
 
