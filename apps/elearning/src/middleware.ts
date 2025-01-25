@@ -1,6 +1,6 @@
 import { NextResponse, type MiddlewareConfig, type NextMiddleware } from 'next/server'
 
-import { updateSession } from '@/db/middleware'
+import { updateSession } from '@/services/db'
 
 const PUBLIC_PAGES = ['/login', '/forgot-password', '/reset-password']
 

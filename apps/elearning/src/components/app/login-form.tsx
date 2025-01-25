@@ -1,42 +1,44 @@
-import { Flex } from '@/components/layout'
+import { Box, Flex, Grid } from '@/components/layout'
 import { Link } from '@/components/typography'
-import { Input, Label, Submit } from '@/components/ui'
-import { Checkbox } from '@/components/ui/checkbox'
-import { useTranslations } from '@/hooks/use-locale'
+import { Checkbox, Input, Label, Submit } from '@/components/ui'
+import { getTranslations } from '@/services/i18n'
 
-export const LoginForm = () => {
-  const t = useTranslations('Login')
+export const LoginForm = async () => {
+  // const db = await getDB()
+  const t = await getTranslations('Login')
 
   return (
-    <div className="grid gap-6">
-      <div className="grid gap-2">
+    <Grid className="gap-6">
+      <Grid className="gap-2">
         <Label htmlFor="email">{'Email'}</Label>
-        <Input id="email" placeholder="m@example.com" required type="email" />
-      </div>
-      <div className="grid gap-2">
-        <div className="flex items-center">
+        <Input id="email" placeholder="me@example.com" required type="email" variant="secondary" />
+      </Grid>
+      <Grid className="gap-2">
+        <Flex align="center">
           <Label htmlFor="password">{'Password'}</Label>
-          <a className="ml-auto text-sm underline-offset-4 hover:underline" href="#">
+          <Link className="ml-auto text-sm" href="#">
             {t('forgotPassword')}
-          </a>
-        </div>
-        <Input id="password" required type="password" />
+          </Link>
+        </Flex>
+        <Input id="password" required type="password" variant="secondary" />
         <Flex>
           <Checkbox id="rememberMe" />
           <Label className="ml-2" htmlFor="rememberMe">
-            {/* {t('rememberMe')} */}
+            {t('rememberMe')}
           </Label>
         </Flex>
-      </div>
-      <Submit className="w-full">{t('login')}</Submit>
-      <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+      </Grid>
+      <Submit fullWidth variant="gradient">
+        {t('login')}
+      </Submit>
+      <Box className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
         <span className="relative z-10 bg-background px-2 text-muted-foreground">{t('dividerMessage')}</span>
-      </div>
-      <div className="text-center text-sm">
+      </Box>
+      <Box className="text-center text-sm">
         {t.rich('registerMessage', {
           link: chunks => <Link href="/">{chunks}</Link>,
         })}
-      </div>
-    </div>
+      </Box>
+    </Grid>
   )
 }

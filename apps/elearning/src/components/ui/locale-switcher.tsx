@@ -4,8 +4,8 @@ import { useCallback, useMemo, useTransition } from 'react'
 
 import { Select, type SelectProps } from '@/components/ui'
 import { useLocale } from '@/hooks/use-locale'
-import { type Locale } from '@/i18n/config'
 import { cn } from '@/lib/utils'
+import { type Locale } from '@/services/i18n'
 
 export interface LocaleSwitcherProps extends SelectProps {}
 

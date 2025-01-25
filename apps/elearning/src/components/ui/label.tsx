@@ -1,5 +1,3 @@
-'use client'
-
 import { forwardRef } from 'react'
 
 import * as LabelPrimitive from '@radix-ui/react-label'
@@ -12,7 +10,7 @@ export const Label = forwardRef<React.ComponentRef<typeof LabelPrimitive.Root>, 
   ({ className, ...props }, ref) => (
     <LabelPrimitive.Root
       className={cn(
-        'text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+        'cursor-pointer text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
         className,
       )}
       ref={ref}

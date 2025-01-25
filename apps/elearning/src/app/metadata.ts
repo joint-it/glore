@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     },
     {
       type: 'image/svg+xml',
-      url: '/favicon.svg',
+      url: '/logo.svg',
     },
     {
       rel: 'shortcut icon',

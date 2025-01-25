@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-restricted-imports
 import packageJson from '../../package.json'
 
 export default packageJson

@@ -1,15 +1,10 @@
-import { useLocale as useNextIntlLocale, useTranslations as useNextIntlTranslations } from 'next-intl'
+'use client'
 
-import { getUserLocale, setUserLocale } from '@/i18n/locale'
+import { useLocale as useNextIntlLocale } from 'next-intl'
+
+import { getLocale, setLocale } from '@/services/i18n'
 
 export const useLocale = () => {
   const locale = useNextIntlLocale()
-
-  return {
-    getLocale: getUserLocale,
-    locale,
-    setLocale: setUserLocale,
-  }
+  return { getLocale, locale, setLocale }
 }
-
-export const useTranslations = useNextIntlTranslations

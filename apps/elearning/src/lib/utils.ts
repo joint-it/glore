@@ -1,18 +1,10 @@
-import { redirect } from 'next/navigation'
-
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
 /**
- * Merge class names with Tailwind CSS and clsx.
+ * Merge Tailwind CSS class names.
  */
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs))
-
-/**
- * Redirects to a specified path with an encoded message as a query parameter.
- */
-export const encodedRedirect = (type: 'error' | 'success', path: string, message: string) =>
-  redirect(`${path}?${type}=${encodeURIComponent(message)}`)
 
 /**
  * Check if the email is valid.
@@ -37,3 +29,8 @@ export const normalizeSpacing = (value: any) => {
   if (typeof value === 'string' || typeof value === 'number') return String(value)
   return '0'
 }
+
+/**
+ * Returns the RGB values as a normalized array.
+ */
+export const rgb = (r: number, g: number, b: number): [number, number, number] => [r / 255, g / 255, b / 255]

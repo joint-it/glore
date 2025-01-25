@@ -1,17 +1,16 @@
+import { type VariantProps } from 'class-variance-authority'
 import { forwardRef } from 'react'
 
 import { cn } from '@/lib/utils'
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+import { inputVariants } from './input.variants'
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(({ className, type, ...props }, ref) => (
-  <input
-    className={cn(
-      'flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-base shadow-xs outline-primary transition-colors placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
-      className,
-    )}
-    ref={ref}
-    type={type}
-    {...props}
-  />
+export interface InputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>,
+    VariantProps<typeof inputVariants> {
+  label?: string | React.ReactNode
+}
+
+export const Input = forwardRef<HTMLInputElement, InputProps>(({ className, size, variant, ...props }, ref) => (
+  <input className={cn(inputVariants({ className, size, variant }))} ref={ref} {...props} />
 ))

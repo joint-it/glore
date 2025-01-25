@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server'
 
-import { createClient } from '@/db/server'
+import { getDB } from './hooks'
 
 export const updateSession = async (request: NextRequest) => {
   try {
@@ -10,7 +10,7 @@ export const updateSession = async (request: NextRequest) => {
       },
     })
 
-    const db = await createClient(() => {
+    const db = await getDB(() => {
       response = NextResponse.next({ request })
     })
 

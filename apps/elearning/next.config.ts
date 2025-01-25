@@ -8,6 +8,8 @@ type BundleAnalyzerConfig = Parameters<typeof withBundleAnalyzer>[0]
 type NextConfigMillion = Parameters<typeof next>[0]
 type MillionConfig = Parameters<typeof next>[1]
 
+const I18N_REQUEST_PATH = './src/services/i18n/request.ts'
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   webpack: config => ({
@@ -30,6 +32,6 @@ const bundleAnalyzerConfig: BundleAnalyzerConfig = {
   enabled: process.env.ANALYZE === 'true',
 }
 
-export default createNextIntlPlugin()(
+export default createNextIntlPlugin(I18N_REQUEST_PATH)(
   next(withBundleAnalyzer(bundleAnalyzerConfig)(nextConfig) as NextConfigMillion, millionConfig),
 )

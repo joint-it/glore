@@ -1,17 +1,14 @@
-'use client'
-
 import { LoginForm } from '@/components/app'
 import { Flex } from '@/components/layout'
 import { H3, P } from '@/components/typography'
-import { Form } from '@/components/ui'
-import { useTranslations } from '@/hooks/use-locale'
+import { getTranslations } from '@/services/i18n'
 
-export default () => {
-  const t = useTranslations('Login')
+export default async () => {
+  const t = await getTranslations('Login')
 
   return (
-    <Flex as={Form} direction="col" gap={6}>
-      <Flex align="center" className="text-center" direction="col" gap={2}>
+    <Flex className="gap-6" direction="col">
+      <Flex align="center" className="gap-2 text-center" direction="col">
         <H3 weight="bold">{t('title')}</H3>
         <P muted size="sm">
           {t('subtitle')}

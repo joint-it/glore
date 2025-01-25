@@ -8,7 +8,7 @@ import sortDestructureKeysPlugin from 'eslint-plugin-sort-destructure-keys'
 import sortKeysPlugin from 'eslint-plugin-sort-keys-fix'
 import unusedImportsPlugin from 'eslint-plugin-unused-imports'
 
-import repoPlugin from '../plugins/repo.js'
+import repoPlugin from '../plugins/glore.js'
 import { mergeConfigOptions, noRestrictedImports, sortImports } from '../utils.js'
 
 /**
