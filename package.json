@@ -11,7 +11,7 @@
     "packages/*"
   ],
   "type": "module",
-  "packageManager": "pnpm@9.15.0",
+  "packageManager": "pnpm@9.15.4",
   "prettier": "@glore/prettier-config",
   "scripts": {
     "prepare": "husky",
