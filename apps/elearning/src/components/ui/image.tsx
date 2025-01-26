@@ -5,7 +5,7 @@ import { type OnLoadingComplete, type PlaceholderValue, type StaticImport } from
 import NextImage from 'next/image'
 import { useMemo } from 'react'
 
-import { cn } from '@/lib/utils'
+import cva, { baseVariants, cn } from '@/lib/cva'
 
 export interface ImageProps
   extends Omit<
@@ -13,7 +13,6 @@ export interface ImageProps
     'alt' | 'height' | 'loading' | 'ref' | 'src' | 'srcSet' | 'width'
   > {
   alt?: string
-  auto?: boolean
   blurDataURL?: string
   fill?: boolean
   height?: number | `${number}`
@@ -34,24 +33,31 @@ export interface ImageProps
   width?: number | `${number}`
 }
 
-export const Image = ({
-  alt = '',
-  auto,
-  className,
-  height = 0,
-  sizes = '100vw',
-  src,
-  width = 0,
-  ...rest
-}: ImageProps) => {
-  const imageClasses = useMemo(() => {
-    const classes = []
-    if (auto || !height) classes.push('h-auto')
-    if (auto || !width) classes.push('w-full')
-    return cn(classes.join(' '), className)
-  }, [auto, className, height, width])
+const Image = (props: ImageProps) => {
+  const { alt = '', className, height = 0, sizes = '100vw', src, width = 0, ...rest } = props
+
+  const fullWidth = useMemo(() => !width, [width])
+  const autoHeight = useMemo(() => !height, [height])
 
   return (
-    <NextImage alt={alt} className={imageClasses} height={height} sizes={sizes} src={src} width={width} {...rest} />
+    <NextImage
+      alt={alt}
+      className={cn(imageVariants({ className, fullWidth, autoHeight }))}
+      height={height}
+      sizes={sizes}
+      src={src}
+      width={width}
+      {...rest}
+    />
   )
 }
+export default Image
+
+const imageVariants = cva('', {
+  variants: {
+    ...baseVariants(['fullWidth']),
+    autoHeight: {
+      true: 'h-auto',
+    },
+  },
+})

@@ -1,0 +1,16 @@
+{
+  "LocaleSwitcher": {
+    "en": "Inglese",
+    "it": "Italiano",
+    "label": "Lingua"
+  },
+  "Login": {
+    "title": "Accedi al tuo account GloRe",
+    "subtitle": "Inserisci la tua email per accedere al tuo account",
+    "forgotPassword": "Password dimenticata?",
+    "login": "Accedi",
+    "dividerMessage": "Non sei ancora iscritto?",
+    "registerMessage": "<link>Clicca qui</link> per scoprire come unirti alla piattaforma!",
+    "rememberMe": "Ricordami"
+  }
+}

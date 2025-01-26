@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+node_modules/.bin/supabase init >/dev/null 2>&1
+
+exit 0

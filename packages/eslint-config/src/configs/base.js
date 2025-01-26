@@ -174,6 +174,7 @@ const configBase = (options = {}) => {
         ],
         'perfectionist/sort-exports': 2,
         'perfectionist/sort-imports': [2, sortImports(opts.imports)],
+        'perfectionist/sort-named-exports': 2,
         'perfectionist/sort-named-imports': [
           2,
           {

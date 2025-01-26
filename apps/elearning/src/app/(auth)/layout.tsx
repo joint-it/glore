@@ -1,27 +1,21 @@
-import { Box, Flex, Grid } from '@/components/layout'
-import { Link } from '@/components/typography'
-import { Image } from '@/components/ui'
-import { Globe } from '@/components/ui/globe'
+import { box, Globe, Image, Link, LocaleSwitcher } from '@/components/ui'
 
 export default ({ children }: React.PropsWithChildren) => (
-  <Grid className="min-h-svh lg:grid-cols-2">
-    <Flex className="gap-4 p-6 md:p-10" direction="col">
-      <Flex className="gap-2 md:justify-start" justify="center">
-        <Link className="flex items-center gap-2 font-medium" href="">
-          <Image alt="" src="/logo.svg" width={25} />
-          {'GloRe Certificate'}
-        </Link>
-      </Flex>
-      <Flex align="center" grow justify="center">
-        <Box className="max-w-xs" fullWidth>
-          {children}
-        </Box>
-      </Flex>
-    </Flex>
-    <Box className="hidden bg-olive-100 lg:block" relative>
-      <Flex center className="h-full p-32">
-        <Globe />
-      </Flex>
-    </Box>
-  </Grid>
+  <box.flex className="min-h-svh overflow-hidden p-6 md:p-10" direction="col" gap={4} relative>
+    <box.flex gap={2} justify="between">
+      <Link className="flex items-center gap-2 font-medium" href="">
+        <Image alt="" src="/logo.svg" width={25} />
+        {'GloRe Certificate'}
+      </Link>
+      <box.flex gap={2}>
+        <LocaleSwitcher />
+      </box.flex>
+    </box.flex>
+    <box.flex align="center" grow justify="center">
+      <box.div className="mb-12 max-w-sm" fullWidth>
+        {children}
+      </box.div>
+    </box.flex>
+    <Globe className="absolute bottom-[-600px] left-[50%] -z-10 w-[1200px] transform-[translateX(-50%)]" />
+  </box.flex>
 )

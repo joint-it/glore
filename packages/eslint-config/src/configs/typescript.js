@@ -64,6 +64,7 @@ const configTypescript = (options = {}) => [
         '@typescript-eslint/no-explicit-any': 0,
         '@typescript-eslint/no-namespace': 0,
         '@typescript-eslint/no-non-null-assertion': 0,
+        '@typescript-eslint/no-redundant-type-constituents': 0,
         '@typescript-eslint/no-unsafe-assignment': 0,
         '@typescript-eslint/no-unsafe-call': 0,
         '@typescript-eslint/no-unsafe-member-access': 0,

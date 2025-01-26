@@ -26,7 +26,10 @@ yarn-error.log*
 .env
 .env.*
 !.env.example
-!.env.sample
+!.env.*.example
+
+# Supabase
+/supabase/
 
 # Vercel
 /.vercel/

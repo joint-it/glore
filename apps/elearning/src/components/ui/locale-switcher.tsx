@@ -2,34 +2,32 @@
 
 import { useCallback, useMemo, useTransition } from 'react'
 
-import { Select, type SelectProps } from '@/components/ui'
 import { useLocale } from '@/hooks/use-locale'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/cva'
 import { type Locale } from '@/services/i18n'
+
+import Select, { type SelectProps } from './select'
+
+const items = [
+  {
+    icon: '🌐',
+    label: 'English',
+    value: 'en',
+  },
+  {
+    icon: '🇮🇹',
+    label: 'Italiano',
+    value: 'it',
+  },
+]
 
 export interface LocaleSwitcherProps extends SelectProps {}
 
-export const LocaleSwitcher = (props: LocaleSwitcherProps) => {
+const LocaleSwitcher = (props: LocaleSwitcherProps) => {
   const { locale, setLocale } = useLocale()
   const [isPending, startTransition] = useTransition()
 
-  const items = useMemo(
-    () => [
-      {
-        icon: '🌐',
-        label: 'English',
-        value: 'en',
-      },
-      {
-        icon: '🇮🇹',
-        label: 'Italiano',
-        value: 'it',
-      },
-    ],
-    [],
-  )
-
-  const activeItem = useMemo(() => items.find(item => item.value === locale), [items, locale])
+  const activeItem = useMemo(() => items.find(item => item.value === locale), [locale])
 
   const onChange = useCallback(
     (locale: Locale) => {
@@ -70,3 +68,4 @@ export const LocaleSwitcher = (props: LocaleSwitcherProps) => {
     </Select>
   )
 }
+export default LocaleSwitcher

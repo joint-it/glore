@@ -1,0 +1,152 @@
+[
+  {
+    "name": "London",
+    "location": [51.5074, -0.1278],
+    "population": 8.866
+  },
+  {
+    "name": "New York",
+    "location": [40.7128, -74.006],
+    "population": 8.623
+  },
+  {
+    "name": "San Francisco",
+    "location": [37.7749, -122.4194],
+    "population": 4.727
+  },
+  {
+    "name": "Paris",
+    "location": [48.8566, 2.3522],
+    "population": 2.141
+  },
+  {
+    "name": "Tokyo",
+    "location": [35.6895, 139.6917],
+    "population": 13.515
+  },
+  {
+    "name": "Sydney",
+    "location": [-33.8688, 151.2093],
+    "population": 4.029
+  },
+  {
+    "name": "Moscow",
+    "location": [55.7558, 37.6176],
+    "population": 11.92
+  },
+  {
+    "name": "Cape Town",
+    "location": [-33.9249, 18.4241],
+    "population": 3.74
+  },
+  {
+    "name": "Buenos Aires",
+    "location": [-34.6037, -58.3816],
+    "population": 3.054
+  },
+  {
+    "name": "Rio de Janeiro",
+    "location": [-22.9068, -43.1729],
+    "population": 6.32
+  },
+  {
+    "name": "Mexico City",
+    "location": [19.4326, -99.1332],
+    "population": 21.339
+  },
+  {
+    "name": "Beijing",
+    "location": [39.9042, 116.4074],
+    "population": 21.516
+  },
+  {
+    "name": "Mumbai",
+    "location": [19.076, 72.8777],
+    "population": 12.478
+  },
+  {
+    "name": "Istanbul",
+    "location": [41.0082, 28.9784],
+    "population": 15.029
+  },
+  {
+    "name": "Cairo",
+    "location": [30.0244, 31.2357],
+    "population": 9.5
+  },
+  {
+    "name": "Dubai",
+    "location": [25.276987, 55.296249],
+    "population": 3.137
+  },
+  {
+    "name": "Seoul",
+    "location": [37.5665, 126.978],
+    "population": 9.963
+  },
+  {
+    "name": "Bangkok",
+    "location": [13.7563, 100.5018],
+    "population": 8.281
+  },
+  {
+    "name": "Singapore",
+    "location": [1.3521, 103.8198],
+    "population": 5.607
+  },
+  {
+    "name": "Hong Kong",
+    "location": [22.3193, 114.1694],
+    "population": 7.392
+  },
+  {
+    "name": "Shanghai",
+    "location": [31.2304, 121.4737],
+    "population": 24.183
+  },
+  {
+    "name": "Taipei",
+    "location": [25.033, 121.5654],
+    "population": 2.704
+  },
+  {
+    "name": "Jakarta",
+    "location": [-6.2088, 106.8456],
+    "population": 10.135
+  },
+  {
+    "name": "Manila",
+    "location": [14.5995, 120.9842],
+    "population": 13.923
+  },
+  {
+    "name": "Kuala Lumpur",
+    "location": [3.139, 101.6869],
+    "population": 7.25
+  },
+  {
+    "name": "Hanoi",
+    "location": [21.0278, 105.8342],
+    "population": 7.379
+  },
+  {
+    "name": "Delhi",
+    "location": [28.6139, 77.209],
+    "population": 18.98
+  },
+  {
+    "name": "Karachi",
+    "location": [24.8607, 67.0011],
+    "population": 14.91
+  },
+  {
+    "name": "Tehran",
+    "location": [35.6892, 51.389],
+    "population": 8.694
+  },
+  {
+    "name": "Lagos",
+    "location": [6.5244, 3.3792],
+    "population": 13.123
+  }
+]

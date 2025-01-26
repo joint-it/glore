@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server'
 
-import { getDB } from './hooks'
+import { getDB } from './server'
 
 export const updateSession = async (request: NextRequest) => {
   try {

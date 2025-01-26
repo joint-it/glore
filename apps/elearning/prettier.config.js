@@ -4,6 +4,6 @@ import prettierConfig from '@glore/prettier-config'
 export default {
   ...prettierConfig,
   plugins: ['prettier-plugin-tailwindcss'],
-  tailwindFunctions: ['cn', 'cva', 'tw', 'twMerge'],
+  tailwindFunctions: ['className', 'cn', 'cva', 'tw', 'twMerge'],
   tailwindStylesheet: './src/app/globals.css',
 }

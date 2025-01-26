@@ -1,4 +1,4 @@
-import { Link } from '@/components/typography'
+import { Link } from '@/components/ui'
 
 export default () => (
   <main lang="en">

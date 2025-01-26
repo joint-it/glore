@@ -13,11 +13,6 @@
   --color-foreground: var(--color-dark);
 
   --color-primary: var(--color-olive);
-  --color-primary-lighter: var(--color-olive-300);
-  --color-primary-light: var(--color-olive-400);
-  --color-primary-dark: var(--color-olive-600);
-  --color-primary-darker: var(--color-olive-700);
-  --color-primary-foreground: var(--color-white);
 
   --color-secondary: var(--color-sea);
   --color-secondary-lighter: var(--color-sea-300);
