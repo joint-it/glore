@@ -20,12 +20,6 @@ export default {
     publish: false,
   },
   plugins: {
-    '@release-it/bumper': {
-      out: {
-        file: 'package.json',
-        path: 'version',
-      },
-    },
     '@release-it/conventional-changelog': {
       preset: {
         name: 'conventionalcommits',
@@ -33,6 +27,5 @@ export default {
       header: '# Changelog',
       infile: 'CHANGELOG.md',
     },
-    'release-it-pnpm': {},
   },
 } satisfies Config
