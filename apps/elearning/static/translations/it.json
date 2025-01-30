@@ -1,16 +1,19 @@
 {
   "LocaleSwitcher": {
-    "en": "Inglese",
-    "it": "Italiano",
     "label": "Lingua"
   },
-  "Login": {
-    "title": "Accedi al tuo account GloRe",
-    "subtitle": "Inserisci la tua email per accedere al tuo account",
+  "Auth": {
     "forgotPassword": "Password dimenticata?",
     "login": "Accedi",
-    "dividerMessage": "Non sei ancora iscritto?",
-    "registerMessage": "<link>Clicca qui</link> per scoprire come unirti alla piattaforma!",
-    "rememberMe": "Ricordami"
+    "loginTitle": "Accedi al tuo account GloRe",
+    "loginSubtitle": "Inserisci il tuo username o la tua mail per accedere all'account",
+    "rememberMe": "Ricordami",
+    "passwordLabel": "Password",
+    "passwordInvalid": "Password non valida",
+    "passwordRequired": "Inserisci una password",
+    "userLabel": "Email o username",
+    "userInvalid": "Email o username non validi",
+    "userNotFound": "Utente non trovato",
+    "userRequired": "Inserisci una email o username"
   }
 }

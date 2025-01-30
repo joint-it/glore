@@ -1,13 +1,13 @@
 import * as SelectPrimitive from '@radix-ui/react-select'
 
 import { CheckIcon } from '@/components/ui/icons'
-import cva, { cn, type VariantProps } from '@/lib/cva'
+import { cn, cva, type VariantProps } from '@/lib/cva'
 
 export interface SelectItemProps
   extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>,
     VariantProps<typeof selectItemVariants> {}
 
-const SelectItem = (props: SelectItemProps) => {
+export const SelectItem = (props: SelectItemProps) => {
   const { children, className, ...rest } = props
 
   return (
@@ -21,7 +21,6 @@ const SelectItem = (props: SelectItemProps) => {
     </SelectPrimitive.Item>
   )
 }
-export default SelectItem
 
 const selectItemVariants = cva(
   'relative flex w-full cursor-default items-center rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',

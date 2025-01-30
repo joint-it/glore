@@ -6,7 +6,7 @@ import createGlobe, { type COBEOptions, type Marker } from 'cobe'
 import { useSpring } from 'react-spring'
 
 import { ColorScheme, useColorScheme } from '@/hooks/use-color-scheme'
-import cva, { cn, type VariantProps } from '@/lib/cva'
+import { cn, cva, type VariantProps } from '@/lib/cva'
 import { rgb } from '@/lib/utils'
 import cities from '#/data/cities.json'
 
@@ -23,7 +23,7 @@ export interface GlobeProps
   config?: COBEOptions
 }
 
-const Globe = (props: GlobeProps) => {
+export const Globe = (props: GlobeProps) => {
   const { className, config, transition, ...rest } = props
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -155,9 +155,8 @@ const Globe = (props: GlobeProps) => {
     </div>
   )
 }
-export default Globe
 
-const globeVariants = cva('aspect-1 relative m-auto h-full w-full')
+export const globeVariants = cva('aspect-1 relative m-auto h-full w-full')
 
 const globeCanvasVariants = cva('h-full w-full cursor-grab', {
   variants: {

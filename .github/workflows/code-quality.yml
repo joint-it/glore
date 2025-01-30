@@ -23,8 +23,8 @@ jobs:
       - name: Run pnpm install
         run: |
           pnpm install --recursive
-          pnpm build
           echo ./node_modules/.bin >> $GITHUB_PATH
+      - run: pnpm build
       - name: Run commitlint on push
         if: github.event_name == 'push'
         run: commitlint --last --verbose

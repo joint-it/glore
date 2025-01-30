@@ -1,4 +1,3 @@
-import { type Redirect } from 'next'
 import { NextResponse } from 'next/server'
 
 import { getDB } from '@/services/db'
@@ -17,5 +16,5 @@ export const GET = async (request: Request) => {
     return NextResponse.redirect(`${origin}${redirectTo}`)
   }
 
-  return NextResponse<Redirect>
+  return NextResponse.redirect(origin)
 }

@@ -3,5 +3,7 @@
 # Run commitlint on new commits
 commitlint --from origin/main --to HEAD --verbose
 
-# Run CI checks
-TURBO_UI=false pnpm run check
+# Build the project and run checks
+pnpm run build
+pnpm run check
+

@@ -5,6 +5,7 @@
     <img src="https://github.com/jointorg/glore/actions/workflows/code-quality.yml/badge.svg" />
   </a>
 </div>
+<br>
 
 [GloRe](https://glorecertificate.net) is an official certificate that verifies volunteering activities.
 

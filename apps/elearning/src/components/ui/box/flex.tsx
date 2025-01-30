@@ -1,14 +1,13 @@
-import cva, { cn, type VariantProps } from '@/lib/cva'
+import { cn, cva, type VariantProps } from '@/lib/cva'
 
-import Div, { type DivProps } from './div'
+import { Div, type DivProps } from './div'
 
 export interface FlexProps extends DivProps, VariantProps<typeof flexVariants> {}
 
-const Flex = (props: FlexProps) => {
+export const Flex = (props: FlexProps) => {
   const { align, className, direction, grow, justify, ...rest } = props
   return <Div className={cn(flexVariants({ align, className, direction, grow, justify }))} {...rest} />
 }
-export default Flex
 
 export const flexVariants = cva(['flex'], {
   variants: {

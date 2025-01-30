@@ -1,18 +1,19 @@
 {
   "LocaleSwitcher": {
-    "en": "English",
-    "it": "Italian",
     "label": "Language"
   },
-  "Login": {
-    "title": "Login to your GloRe account",
-    "subtitle": "Enter your email below to login to your account",
+  "Auth": {
     "forgotPassword": "Forgot your password?",
     "login": "Login",
-    "userRequired": "Please insert your email or username",
-    "userInvalid": "Please insert a valid email or username",
-    "dividerMessage": "Not subscribed yet?",
-    "registerMessage": "<link>Click here</link> to discover how to join the platform!",
-    "rememberMe": "Remember me"
+    "loginTitle": "Login to your GloRe account",
+    "loginSubtitle": "Enter an email or username to login to your account",
+    "rememberMe": "Remember me",
+    "passwordLabel": "Password",
+    "passwordInvalid": "Invalid password",
+    "passwordRequired": "Insert your password",
+    "userLabel": "Email or username",
+    "userInvalid": "Invalid email or username",
+    "userNotFound": "User not found",
+    "userRequired": "Email or username is required"
   }
 }

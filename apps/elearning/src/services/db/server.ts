@@ -4,14 +4,14 @@ import { cookies } from 'next/headers'
 
 import { createServerClient } from '@supabase/ssr'
 
-import Env from '@/lib/env'
+import { env } from '@/lib/env'
 
 import { type Database } from './types'
 
 export const getDB = async (setCookiesCallback = () => {}) => {
   const cookieStore = await cookies()
 
-  return createServerClient<Database>(Env.SUPABASE_URL, Env.SUPABASE_ANON_KEY, {
+  return createServerClient<Database>(env.SUPABASE_URL, env.SUPABASE_ANON_KEY, {
     cookies: {
       getAll() {
         return cookieStore.getAll()

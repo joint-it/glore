@@ -1,11 +1,11 @@
-import { cva as cvaBase, type VariantProps } from 'class-variance-authority'
+import { cva as cvaBase, type VariantProps as VariantPropsBase } from 'class-variance-authority'
 import { type ClassProp } from 'class-variance-authority/types'
 import clsx, { type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
-import type { StringToBoolean } from '@/lib/types'
+import type { AnyFunction, StringToBoolean } from '@/lib/types'
 
-const BASE_VARIANTS = {
+export const BASE_VARIANTS = {
   absolute: {
     true: 'absolute',
   },
@@ -35,16 +35,40 @@ const BASE_VARIANTS = {
     16: 'gap-16',
     32: 'gap-32',
     64: 'gap-64',
+  } satisfies {
+    [Gap in VariantSizeNumber]: ClassValue
   },
   relative: {
     true: 'relative',
   },
-} as const
+  textColor: {
+    base: 'text-gray-900 dark:text-gray-100',
+    primary: 'text-primary',
+    secondary: 'text-secondary',
+    warning: 'text-yellow-500 dark:text-yellow-400',
+    danger: 'text-red-500 dark:text-red-400',
+    success: 'text-green-500 dark:text-green-400',
+    info: 'text-blue-500 dark:text-blue-400',
+  } satisfies {
+    [Color in VariantColor]: ClassValue
+  },
+  textSize: {
+    base: 'text-base',
+    xs: 'text-xs',
+    sm: 'text-sm',
+    md: 'text-md',
+    lg: 'text-lg',
+    xl: 'text-xl',
+  } satisfies {
+    [Size in VariantTextSize]: ClassValue
+  },
+}
 
 interface Config<T> {
   variants?: T &
     Partial<{
       color: {
+        base: ClassValue
         primary: ClassValue
         secondary: ClassValue
         info: ClassValue
@@ -76,17 +100,52 @@ type ConfigVariantsMulti<T> = {
 
 type Props<T> = T extends ConfigSchema ? ConfigVariants<T> & ClassProp : ClassProp
 
-const cva = <T>(base?: ClassValue, config?: Config<T>) =>
+/**
+ * Creates an enhanced class variance authority function.
+ */
+export const cva = <T>(base?: ClassValue, config?: Config<T>) =>
   cvaBase(base, config as Config<ConfigSchema>) as (props: Props<T>) => string
-export default cva
-export type { VariantProps }
 
+/**
+ * Merges class names and Tailwind CSS classes.
+ */
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs))
 
-export const baseVariants = <T extends keyof typeof BASE_VARIANTS>(keys: T[]) => {
-  const variants = {} as Pick<typeof BASE_VARIANTS, T>
-  for (const key of keys) {
-    variants[key] = BASE_VARIANTS[key]
-  }
-  return variants
-}
+/**
+ * Returns the specified base variants.
+ */
+export const baseVariants = <T extends keyof typeof BASE_VARIANTS>(keys: T[]) =>
+  keys.reduce<Pick<typeof BASE_VARIANTS, T>>(
+    (acc, key) => ({ ...acc, [key]: BASE_VARIANTS[key] }),
+    {} as Pick<typeof BASE_VARIANTS, T>,
+  )
+
+/**
+ * Variant properties for a component.
+ */
+export type VariantProps<Component extends AnyFunction> = VariantPropsBase<Component>
+
+/**
+ * Variant color options.
+ */
+export type VariantColor = 'base' | 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'danger'
+
+/**
+ * Variant size options.
+ */
+export type VariantSize = 'xs' | VariantSizeBase | 'xl'
+
+/**
+ * Base variant size options.
+ */
+export type VariantSizeBase = 'sm' | 'md' | 'lg'
+
+/**
+ * Variant size number options.
+ */
+export type VariantSizeNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 16 | 32 | 64
+
+/**
+ * Variant text size options.
+ */
+export type VariantTextSize = VariantSize | 'base'

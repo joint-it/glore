@@ -1,8 +1,8 @@
 import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 import type { TooltipProps } from '@radix-ui/react-tooltip'
 
-import TooltipContent from './content'
-import TooltipTrigger from './trigger'
+import { TooltipContent } from './content'
+import { TooltipTrigger } from './trigger'
 
 const Tooltip = ({ children, ...props }: TooltipProps) => (
   <TooltipPrimitive.Provider>
@@ -12,5 +12,4 @@ const Tooltip = ({ children, ...props }: TooltipProps) => (
 Tooltip.Content = TooltipContent
 Tooltip.Trigger = TooltipTrigger
 
-export default Tooltip
-export type { TooltipProps }
+export { Tooltip, type TooltipProps }

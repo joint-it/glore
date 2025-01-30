@@ -2,15 +2,17 @@
 
 import { forwardRef, useCallback, useMemo, useRef, useState } from 'react'
 
-import cva, { baseVariants, cn, type VariantProps } from '@/lib/cva'
+import { baseVariants, cn, cva, type VariantProps } from '@/lib/cva'
 
-import box from './box'
-import Button from './button'
+import { box } from './box'
+import { Button } from './button'
 import { EyeClosedIcon, EyeIcon } from './icons'
 
-const InputBase = forwardRef<HTMLInputElement, InputProps>(({ className, color, size, ...props }, ref) => (
-  <input className={cn(inputVariants({ className, color, size }))} formNoValidate ref={ref} {...props} />
-))
+export const InputBase = forwardRef<HTMLInputElement, InputProps>(
+  ({ className, color, fullWidth, size, ...props }, ref) => (
+    <input className={cn(inputVariants({ className, color, fullWidth, size }))} formNoValidate ref={ref} {...props} />
+  ),
+)
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'color' | 'size'>,
@@ -18,7 +20,7 @@ export interface InputProps
   label?: string | React.ReactNode
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) => {
   const { type = 'text', ...rest } = props
 
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -28,12 +30,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
 
   const PasswordIcon = useMemo(() => (inputType === 'password' ? EyeClosedIcon : EyeIcon), [inputType])
 
-  const focusInput = useCallback(() => {
-    passwordRef.current?.focus()
-  }, [])
-
   const toggleVisibility = useCallback(() => {
     setInputType(inputType === 'password' ? 'text' : 'password')
+    passwordRef.current?.focus()
   }, [inputType])
 
   if (isPassword) {
@@ -43,7 +42,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
         <Button
           className="text-gray absolute top-[50%] right-2 -translate-y-1/2 transform"
           onClick={toggleVisibility}
-          onFocus={focusInput}
           size="icon"
           variant="transparent"
         >
@@ -55,9 +53,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
 
   return <InputBase ref={ref} type={type} {...rest} />
 })
-export default Input
 
-const inputVariants = cva(
+export const inputVariants = cva(
   [
     [
       'block',
@@ -82,19 +79,28 @@ const inputVariants = cva(
     variants: {
       ...baseVariants(['fullWidth']),
       color: {
-        danger: ['focus:ring-red-500', 'focus-visible:border-red-500', 'focus:border-red-500'],
-        info: ['focus:ring-blue-500', 'focus:border-blue-600'],
+        base: ['focus:ring-gray-500', 'focus:border-gray-600'],
         primary: ['focus:ring-blue-500', 'focus:border-blue-600'],
         secondary: ['focus:ring-sky-600', 'focus:border-sky-600'],
-        success: ['focus:ring-green-500', 'focus:border-green-500'],
+        info: ['focus:ring-blue-500', 'focus:border-blue-600'],
+        success: [
+          ['bg-green-50', 'border-green-500', 'text-green-900', 'placeholder-green-300'],
+          ['focus:ring-green-500', 'focus:border-green-500'],
+          ['dark:bg-gray-700', 'dark:text-green-400', 'dark:placeholder-green-500', 'dark:border-green-500'],
+        ],
         warning: ['focus:ring-yellow-500', 'focus:border-yellow-500'],
+        danger: [
+          ['bg-red-50', 'border-red-500', 'text-red-900', 'placeholder-red-300'],
+          ['focus:ring-red-500', 'focus:border-red-500'],
+          ['dark:bg-gray-800', 'dark:text-red-400', 'dark:placeholder-red-400', 'dark:border-red-500'],
+        ],
       },
       size: {
-        lg: 'p-4 ps-5 pe-5',
-        md: 'p-2 ps-3 pe-3',
-        sm: 'p-1 ps-2 pe-2',
-        xl: 'p-5 ps-6 pe-6',
         xs: 'p-1 ps-2 pe-2',
+        sm: 'p-1 ps-2 pe-2',
+        md: 'p-2',
+        lg: 'p-4 ps-5 pe-5',
+        xl: 'p-5 ps-6 pe-6',
       },
     },
   },
