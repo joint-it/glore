@@ -13,4 +13,5 @@ export {
   EyeIcon,
   GalleryVerticalEndIcon,
   LanguagesIcon,
+  LoaderIcon,
 } from 'lucide-react'

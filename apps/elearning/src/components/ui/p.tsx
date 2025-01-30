@@ -1,13 +1,22 @@
 import { forwardRef } from 'react'
 
-import cva, { cn, type VariantProps } from '@/lib/cva'
+import { BASE_VARIANTS, cn, cva, type VariantProps } from '@/lib/cva'
 
-export interface PProps extends React.HTMLAttributes<HTMLParagraphElement>, VariantProps<typeof pVariants> {}
+export interface PProps
+  extends Omit<React.HTMLAttributes<HTMLParagraphElement>, 'color'>,
+    VariantProps<typeof pVariants> {}
 
-const P = forwardRef<HTMLParagraphElement, PProps>((props, ref) => {
-  const { className, ...rest } = props
-  return <p className={cn(pVariants({ className }))} ref={ref} {...rest} />
+export const P = forwardRef<HTMLParagraphElement, PProps>((props, ref) => {
+  const { className, color, size, ...rest } = props
+  return <p className={cn(pVariants({ className, color, size }))} ref={ref} {...rest} />
 })
-export default P
 
-const pVariants = cva('text-gray-500 dark:text-gray-400')
+export const pVariants = cva('', {
+  defaultVariants: {
+    color: 'base',
+  },
+  variants: {
+    color: BASE_VARIANTS.textColor,
+    size: BASE_VARIANTS.textSize,
+  },
+})

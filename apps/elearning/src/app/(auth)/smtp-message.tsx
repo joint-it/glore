@@ -1,4 +1,4 @@
-import { ExternalLink } from '@/components/typography'
+import { ExternalLink } from '@/components/ui'
 
 export default () => (
   <div>

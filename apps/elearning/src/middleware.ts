@@ -1,13 +1,8 @@
-import { NextResponse, type MiddlewareConfig, type NextMiddleware } from 'next/server'
+import { type MiddlewareConfig, type NextMiddleware } from 'next/server'
 
 import { updateSession } from '@/services/db'
 
-const PUBLIC_PAGES = ['/login', '/forgot-password', '/reset-password']
-
-export const middleware: NextMiddleware = async request => {
-  if (PUBLIC_PAGES.includes(request.nextUrl.pathname)) return NextResponse.next({ request })
-  return await updateSession(request)
-}
+export const middleware: NextMiddleware = async request => await updateSession(request)
 
 export const config: MiddlewareConfig = {
   matcher: [

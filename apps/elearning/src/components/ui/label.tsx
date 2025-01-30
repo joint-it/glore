@@ -2,17 +2,29 @@ import { forwardRef } from 'react'
 
 import * as LabelPrimitive from '@radix-ui/react-label'
 
-import cva, { cn, type VariantProps } from '@/lib/cva'
+import { BASE_VARIANTS, cn, cva, type VariantProps } from '@/lib/cva'
 
 export interface LabelProps
-  extends React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>,
+  extends Omit<React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>, 'color'>,
     VariantProps<typeof labelVariants> {}
 
-const Label = forwardRef<React.ComponentRef<typeof LabelPrimitive.Root>, LabelProps>(({ className, ...props }, ref) => (
-  <LabelPrimitive.Root className={cn(labelVariants({ className }))} ref={ref} {...props} />
-))
-export default Label
+export const Label = forwardRef<React.ComponentRef<typeof LabelPrimitive.Root>, LabelProps>((props, ref) => {
+  const { className, color, size, weight, ...rest } = props
+  return <LabelPrimitive.Root className={cn(labelVariants({ className, color, size, weight }))} ref={ref} {...rest} />
+})
 
-const labelVariants = cva(
-  'cursor-pointer text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+export const labelVariants = cva(
+  'inline-block cursor-pointer leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+  {
+    defaultVariants: {
+      color: 'base',
+      size: 'sm',
+      weight: 'medium',
+    },
+    variants: {
+      color: BASE_VARIANTS.textColor,
+      size: BASE_VARIANTS.textSize,
+      weight: BASE_VARIANTS.fontWeight,
+    },
+  },
 )

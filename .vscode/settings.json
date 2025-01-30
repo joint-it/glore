@@ -42,6 +42,9 @@
   },
   "html.format.indentInnerHtml": true,
   "html.format.unformatted": "html,style",
+  "i18n-ally.enabledFrameworks": ["next-intl"],
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.localesPaths": ["./apps/elearning/static/translations"],
   "prettier.ignorePath": "",
   "search.useIgnoreFiles": true,
   "tailwindCSS.experimental.classRegex": [

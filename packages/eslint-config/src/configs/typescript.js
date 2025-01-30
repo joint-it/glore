@@ -62,6 +62,7 @@ const configTypescript = (options = {}) => [
           },
         ],
         '@typescript-eslint/no-explicit-any': 0,
+        '@typescript-eslint/no-misused-promises': 0,
         '@typescript-eslint/no-namespace': 0,
         '@typescript-eslint/no-non-null-assertion': 0,
         '@typescript-eslint/no-redundant-type-constituents': 0,
@@ -88,7 +89,7 @@ const configTypescript = (options = {}) => [
     },
     {
       name: 'types',
-      files: ['**/*.d.ts', '**/types.ts'],
+      files: ['**/*.d.ts', '**/types.ts', '**/*.types.ts'],
       rules: {
         'max-lines': 0,
       },

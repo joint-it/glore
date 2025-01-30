@@ -2,7 +2,7 @@ import { forwardRef } from 'react'
 
 import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 
-const TooltipTrigger = forwardRef<
+export const TooltipTrigger = forwardRef<
   React.ComponentRef<typeof TooltipPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger>
 >(({ children, ...props }, ref) => (
@@ -10,4 +10,3 @@ const TooltipTrigger = forwardRef<
     {children}
   </TooltipPrimitive.Trigger>
 ))
-export default TooltipTrigger

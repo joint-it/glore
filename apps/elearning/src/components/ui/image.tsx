@@ -5,7 +5,7 @@ import { type OnLoadingComplete, type PlaceholderValue, type StaticImport } from
 import NextImage from 'next/image'
 import { useMemo } from 'react'
 
-import cva, { baseVariants, cn } from '@/lib/cva'
+import { baseVariants, cn, cva } from '@/lib/cva'
 
 export interface ImageProps
   extends Omit<
@@ -33,27 +33,32 @@ export interface ImageProps
   width?: number | `${number}`
 }
 
-const Image = (props: ImageProps) => {
-  const { alt = '', className, height = 0, sizes = '100vw', src, width = 0, ...rest } = props
+export const Image = (props: ImageProps) => {
+  const { alt = '', className, height, sizes = '100vw', style, width, ...rest } = props
 
-  const fullWidth = useMemo(() => !width, [width])
-  const autoHeight = useMemo(() => !height, [height])
+  const styles = useMemo(
+    () => ({
+      height: height ? (typeof height === 'string' ? height : `${height}px`) : 'auto',
+      width: width ? (typeof width === 'string' ? width : `${width}px`) : 'auto',
+      ...style,
+    }),
+    [height, style, width],
+  )
 
   return (
     <NextImage
       alt={alt}
-      className={cn(imageVariants({ className, fullWidth, autoHeight }))}
-      height={height}
+      className={cn(imageVariants({ className }))}
+      height={0}
       sizes={sizes}
-      src={src}
-      width={width}
+      style={styles}
+      width={0}
       {...rest}
     />
   )
 }
-export default Image
 
-const imageVariants = cva('', {
+export const imageVariants = cva('', {
   variants: {
     ...baseVariants(['fullWidth']),
     autoHeight: {

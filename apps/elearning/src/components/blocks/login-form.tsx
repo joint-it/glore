@@ -1,81 +1,114 @@
 'use client'
 
+import { redirect } from 'next/navigation'
 import { useCallback, useRef, useState } from 'react'
 
-import { box, Button, Checkbox, Field, Form, Input, Label, Link, type InputProps } from '@/components/ui'
+import { box, Button, Checkbox, Field, Form, Link, type InputProps } from '@/components/ui'
 import { useDB } from '@/hooks/use-db'
 import { useTranslations } from '@/hooks/use-translations'
-import { isValidEmail } from '@/lib/utils'
+import { isEmail, isUsername } from '@/lib/utils'
 
-export interface LoginFormProps {}
-
-const LoginForm = () => {
+export const LoginForm = () => {
   const db = useDB()
-  const t = useTranslations('Login')
+  const t = useTranslations('Auth')
 
   const userRef = useRef<HTMLInputElement>(null)
   const [user, setUser] = useState('')
   const [userError, setUserError] = useState('')
-  const [userColor, setUserVariant] = useState<InputProps['color']>('secondary')
+  const [userColor, setUserColor] = useState<InputProps['color']>('secondary')
+
   const passwordRef = useRef<HTMLInputElement>(null)
   const [password, setPassword] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  const [passwordVariant, setPasswordVariant] = useState<InputProps['color']>('secondary')
+  const [passwordColor, setPasswordColor] = useState<InputProps['color']>('secondary')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const [userDisabled, setUserDisabled] = useState(false)
-  const [showPasswordInput, setShowPasswordInput] = useState(false)
+  const onUserChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setUser(event.target.value)
+    setUserError('')
+    setUserColor('secondary')
+  }, [])
 
-  const onContinue = useCallback(async () => {
-    setUserDisabled(true)
-    if (!isValidEmail(user)) {
-      setUserVariant('danger')
-      setUserError(user ? t('userRequired') : t('userInvalid'))
+  const onPasswordChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value)
+    setPasswordError('')
+    setPasswordColor('secondary')
+  }, [])
+
+  const triggerUserError = useCallback((error: string) => {
+    setUserColor('danger')
+    setUserError(error)
+    userRef.current?.focus()
+    setIsSubmitting(false)
+  }, [])
+
+  const triggerPasswordError = useCallback((error: string) => {
+    setPasswordColor('danger')
+    setPasswordError(error)
+    passwordRef.current?.focus()
+    setIsSubmitting(false)
+  }, [])
+
+  const onSubmit = useCallback(async () => {
+    setIsSubmitting(true)
+
+    if (!isEmail(user) && !isUsername(user)) {
+      const error = user ? t('userInvalid') : t('userRequired')
+      triggerUserError(error)
       return
     }
-    const { data } = await db.from('profiles').select().or(`email.eq.${user},username.eq.${user}`).single()
-    console.log(data)
-  }, [user, setUserError, setUserVariant, t])
+
+    const { data: profile } = await db.from('profiles').select().or(`email.eq.${user},username.eq.${user}`).single()
+
+    if (!profile) {
+      triggerUserError(t('userNotFound'))
+      return
+    }
+    if (!password) {
+      triggerPasswordError(t('passwordRequired'))
+      return
+    }
+
+    const { error } = await db.auth.signInWithPassword({
+      email: profile.email,
+      password,
+    })
+
+    if (error) {
+      triggerPasswordError(t('passwordInvalid'))
+      return
+    }
+
+    redirect('/')
+  }, [db, password, t, triggerPasswordError, triggerUserError, user])
 
   return (
-    <Form className="grid gap-6">
-      <box.grid gap={4}>
-        <Field
-          color={userColor}
-          disabled={userDisabled}
-          gap={4}
-          id="user"
-          label="Email or username"
-          message={userError}
-          placeholder="me@example.com"
-          ref={userRef}
-        />
-        {!showPasswordInput && (
-          <Button className="font-medium" color="info" fullWidth onClick={onContinue}>
-            {'Continue'}
-          </Button>
-        )}
-      </box.grid>
-      {showPasswordInput && (
-        <box.grid gap={2}>
-          <box.flex align="center">
-            <Label htmlFor="password">{'Password'}</Label>
-            <Link className="ml-auto text-sm" href="#">
-              {t('forgotPassword')}
-            </Link>
-          </box.flex>
-          <Input formNoValidate id="password" type="password" variant="secondary" />
-          <box.flex className="mt-1 mb-1">
-            <Checkbox color="secondary" id="rememberMe" />
-            <Label className="ml-2" htmlFor="rememberMe">
-              {t('rememberMe')}
-            </Label>
-          </box.flex>
-          <Button className="font-medium" fullWidth type="submit" variant="gradient">
-            {t('login')}
-          </Button>
-        </box.grid>
-      )}
+    <Form className="grid w-sm max-w-sm gap-2" onSubmit={onSubmit}>
+      <Field
+        color={userColor}
+        id="user"
+        label={t('userLabel')}
+        message={userError}
+        onChange={onUserChange}
+        placeholder="me@example.com"
+        ref={userRef}
+      />
+      <Field
+        color={passwordColor}
+        id="password"
+        label={t('passwordLabel')}
+        message={passwordError}
+        onChange={onPasswordChange}
+        ref={passwordRef}
+        type="password"
+      />
+      <box.flex align="center" className="mb-2" justify="between">
+        <Checkbox color="secondary" id="rememberMe" label={t('rememberMe')} />
+        <Link href="/">{t('forgotPassword')}</Link>
+      </box.flex>
+      <Button color="info" fontWeight="medium" fullWidth loading={isSubmitting} type="submit" variant="gradient">
+        {t('login')}
+      </Button>
     </Form>
   )
 }
-export default LoginForm

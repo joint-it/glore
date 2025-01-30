@@ -1,20 +1,18 @@
 import { forwardRef } from 'react'
 
 import { type Icon } from '@/components/ui/icons'
-import cva, { cn, type VariantProps } from '@/lib/cva'
-import type { SizeBase } from '@/lib/types'
+import { cn, cva, type VariantProps, type VariantSizeBase } from '@/lib/cva'
 
 export interface SelectIconProps extends React.ComponentPropsWithoutRef<Icon>, VariantProps<typeof selectIconVariants> {
   className?: string
   icon: Icon
-  size?: SizeBase
+  size?: VariantSizeBase
 }
 
-const SelectIcon = forwardRef<React.ComponentRef<Icon>, SelectIconProps>((props, ref) => {
+export const SelectIcon = forwardRef<React.ComponentRef<Icon>, SelectIconProps>((props, ref) => {
   const { className, icon: IconComponent, size, ...rest } = props
   return <IconComponent className={cn(selectIconVariants({ className, size }))} ref={ref} {...rest} />
 })
-export default SelectIcon
 
 export const selectIconVariants = cva('', {
   defaultVariants: {
