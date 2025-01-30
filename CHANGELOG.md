@@ -1,0 +1,21 @@
+# Changelog
+
+## 0.1.0 (2025-01-30)
+
+* ci: rename `validate-commits` workflow to `code-quality` ([acc8865](https://github.com/francojoint/glore/commit/acc8865))
+* ci: set up releases ([c20c86e](https://github.com/francojoint/glore/commit/c20c86e))
+* feat: add globe using `cobe` ([9d9dff2](https://github.com/francojoint/glore/commit/9d9dff2))
+* feat: add login and set up translations ([dd2d591](https://github.com/francojoint/glore/commit/dd2d591))
+* feat: add Supabase and set up authentication ([06325f2](https://github.com/francojoint/glore/commit/06325f2))
+* feat: set up main components ([b7cbab7](https://github.com/francojoint/glore/commit/b7cbab7))
+* feat: set up Tailwind CSS and shadcn ([16245cc](https://github.com/francojoint/glore/commit/16245cc))
+* build: bump pnpm to v9.15.4 ([c179797](https://github.com/francojoint/glore/commit/c179797))
+* build(deps-dev): add `@tailwindcss/postcss` to support the new postcss plugin ([99878dd](https://github.com/francojoint/glore/commit/99878dd))
+* build(deps): remove unused dependencies ([c9a2830](https://github.com/francojoint/glore/commit/c9a2830))
+* build(deps): upgrade packages and use Tailwind CSS v4 ([879cdcd](https://github.com/francojoint/glore/commit/879cdcd))
+* docs: update readme ([88fbd45](https://github.com/francojoint/glore/commit/88fbd45))
+* docs: use asbolute paths in readme ([3352efa](https://github.com/francojoint/glore/commit/3352efa))
+* chore: init and configure project ([0c5cca0](https://github.com/francojoint/glore/commit/0c5cca0))
+* chore: remove `server` and add headless app `elearning` ([69d005c](https://github.com/francojoint/glore/commit/69d005c))
+* chore: setup api using fastify ([b1a7876](https://github.com/francojoint/glore/commit/b1a7876))
+* chore: use monorepo and add `server` project ([9417c39](https://github.com/francojoint/glore/commit/9417c39))
