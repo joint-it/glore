@@ -140,7 +140,7 @@ export const sortImports = (imports = {}) => {
   } = mergeConfigOptions(DEFAULT_CONFIG_OPTIONS, { imports }).imports
 
   const customGroups = [...external, ...internal, ...groups].reduce((groups, name) => {
-    const regexName = name.replace('*', '.*')
+    const regexName = name.replace(/\*/g, '.*')
     const patterns = [new RegExp(`^${regexName}$`), new RegExp(`^${regexName}/.*`)]
 
     return {
