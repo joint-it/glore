@@ -1,19 +1,20 @@
-import { box, Globe, Image, Link, LocaleSwitcher } from '@/components/ui'
+import { Flex } from '@/components/ui/flex'
+import { Globe } from '@/components/ui/globe'
+import { Link } from '@/components/ui/link'
+import { Logo } from '@/components/ui/logo'
 
 export default ({ children }: React.PropsWithChildren) => (
-  <box.flex className="min-h-svh overflow-hidden p-6 md:p-10" direction="col" gap={4} relative>
-    <box.flex gap={2} justify="between">
+  <Flex className="min-h-svh overflow-hidden p-6 md:p-10" direction="col" gap={4} relative>
+    <Flex gap={2} justify="between">
       <Link className="text-md flex items-center gap-2 font-medium" href="">
-        <Image alt="" src="/logo.svg" width={25} />
+        <Logo width={25} />
         {'GloRe Certificate'}
       </Link>
-      <box.flex gap={2}>
-        <LocaleSwitcher />
-      </box.flex>
-    </box.flex>
-    <box.flex align="center" className="mb-12" fullWidth grow justify="center">
+      <Flex gap={2}>{/* <LocaleSwitcher /> */}</Flex>
+    </Flex>
+    <Flex align="center" className="mb-12" fullWidth grow justify="center">
       {children}
-    </box.flex>
+    </Flex>
     <Globe className="absolute bottom-[-600px] left-[50%] -z-10 w-[1200px] transform-[translateX(-50%)]" />
-  </box.flex>
+  </Flex>
 )

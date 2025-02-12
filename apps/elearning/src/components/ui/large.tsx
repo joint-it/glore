@@ -1,11 +1,13 @@
 import { forwardRef } from 'react'
 
-import { cn, cva, type VariantProps } from '@/lib/cva'
+import { displayName } from '@/lib/utils'
+import { cn } from '@/theme/utils'
 
-export interface LargeProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof largeVariants> {}
+interface LargeProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const Large = forwardRef<HTMLDivElement, LargeProps>(({ className, ...props }, ref) => (
-  <div className={cn(largeVariants({ className }))} ref={ref} {...props} />
+const Large = forwardRef<HTMLDivElement, LargeProps>(({ className, ...props }, ref) => (
+  <div className={cn('text-xl font-semibold', className)} ref={ref} {...props} />
 ))
+Large.displayName = displayName('Large')
 
-export const largeVariants = cva('text-lg font-semibold')
+export { Large, type LargeProps }

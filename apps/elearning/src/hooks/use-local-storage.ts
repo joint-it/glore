@@ -2,28 +2,22 @@
 
 import { useCallback, useMemo, type Dispatch } from 'react'
 
-import { type Profile } from '@/services/db'
-import app from '#/config/app.json'
+import { isServer } from '@joint-it/utils'
 
-declare interface AppStorage {
-  user_profile: Profile
-}
-
-export interface UseLocalStorageOptions {
-  prefix?: string
-}
-
-const IS_SERVER = typeof window === 'undefined'
+import { type LocalStorageItem } from '@/lib/storage'
+import { slug } from 'config/app.json'
 
 export const useLocalStorage = <T>(
-  key: string,
+  item: LocalStorageItem,
   initialValue?: T,
-  options?: UseLocalStorageOptions,
+  options = {
+    prefix: slug,
+  },
 ): [T | undefined, Dispatch<T>, () => void] => {
-  key = useMemo(() => (options?.prefix ? `${options.prefix}:${key}` : key), [key, options?.prefix])
+  const key = useMemo(() => (options?.prefix ? `${options.prefix}:${item}` : item), [item, options?.prefix])
 
   const storedValue = useMemo(() => {
-    if (IS_SERVER) return initialValue
+    if (isServer()) return initialValue
     const raw = window.localStorage.getItem(key)
     if (!raw) return initialValue
     return JSON.parse(raw) as T
@@ -31,19 +25,16 @@ export const useLocalStorage = <T>(
 
   const setValue = useCallback(
     (value: T) => {
-      if (IS_SERVER) return
+      if (isServer()) return
       window.localStorage.setItem(key, JSON.stringify(value))
     },
     [key],
   )
 
   const removeValue = useCallback(() => {
-    if (IS_SERVER) return
+    if (isServer()) return
     window.localStorage.removeItem(key)
   }, [key])
 
   return [storedValue, setValue, removeValue]
 }
-
-export const useAppStorage = <T>(key: keyof AppStorage, initialValue?: T) =>
-  useLocalStorage(key, initialValue, { prefix: app.id })

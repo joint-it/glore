@@ -1,11 +1,13 @@
 import { forwardRef } from 'react'
 
-import { cn, cva, type VariantProps } from '@/lib/cva'
+import { displayName } from '@/lib/utils'
+import { cn } from '@/theme/utils'
 
-export interface H4Props extends React.HTMLAttributes<HTMLHeadingElement>, VariantProps<typeof h4Variants> {}
+interface H4Props extends React.HTMLAttributes<HTMLHeadingElement> {}
 
-export const H4 = forwardRef<HTMLHeadingElement, H4Props>(({ className, ...props }, ref) => (
-  <h4 className={cn(h4Variants({ className }))} ref={ref} {...props} />
+const H4 = forwardRef<HTMLHeadingElement, H4Props>(({ className, ...props }, ref) => (
+  <h4 className={cn('text-xl font-semibold tracking-tight', className)} ref={ref} {...props} />
 ))
+H4.displayName = displayName('H4')
 
-export const h4Variants = cva('text-xl font-semibold tracking-tight')
+export { H4, type H4Props }

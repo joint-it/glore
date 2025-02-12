@@ -1,11 +1,13 @@
 import { forwardRef } from 'react'
 
-import { cn, cva, type VariantProps } from '@/lib/cva'
+import { displayName } from '@/lib/utils'
+import { cn } from '@/theme/utils'
 
-export interface LeadProps extends React.HTMLAttributes<HTMLParagraphElement>, VariantProps<typeof leadVariants> {}
+interface LeadProps extends React.HTMLAttributes<HTMLParagraphElement> {}
 
-export const Lead = forwardRef<HTMLParagraphElement, LeadProps>(({ className, ...props }, ref) => (
-  <p className={cn(leadVariants({ className }))} ref={ref} {...props} />
+const Lead = forwardRef<HTMLParagraphElement, LeadProps>(({ className, ...props }, ref) => (
+  <p className={cn('text-xl text-muted', className)} ref={ref} {...props} />
 ))
+Lead.displayName = displayName('Lead')
 
-export const leadVariants = cva('text-xl text-muted-foreground')
+export { Lead, type LeadProps }

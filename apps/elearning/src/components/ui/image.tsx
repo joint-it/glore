@@ -5,9 +5,9 @@ import { type OnLoadingComplete, type PlaceholderValue, type StaticImport } from
 import NextImage from 'next/image'
 import { useMemo } from 'react'
 
-import { baseVariants, cn, cva } from '@/lib/cva'
+import { displayName } from '@/lib/utils'
 
-export interface ImageProps
+interface ImageProps
   extends Omit<
     React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>,
     'alt' | 'height' | 'loading' | 'ref' | 'src' | 'srcSet' | 'width'
@@ -33,36 +33,20 @@ export interface ImageProps
   width?: number | `${number}`
 }
 
-export const Image = (props: ImageProps) => {
-  const { alt = '', className, height, sizes = '100vw', style, width, ...rest } = props
+const Image = (props: ImageProps) => {
+  const { alt = '', height, sizes = '100vw', style, width, ...rest } = props
 
   const styles = useMemo(
     () => ({
-      height: height ? (typeof height === 'string' ? height : `${height}px`) : 'auto',
       width: width ? (typeof width === 'string' ? width : `${width}px`) : 'auto',
+      height: height ? (typeof height === 'string' ? height : `${height}px`) : 'auto',
       ...style,
     }),
     [height, style, width],
   )
 
-  return (
-    <NextImage
-      alt={alt}
-      className={cn(imageVariants({ className }))}
-      height={0}
-      sizes={sizes}
-      style={styles}
-      width={0}
-      {...rest}
-    />
-  )
+  return <NextImage alt={alt} height={0} sizes={sizes} style={styles} width={0} {...rest} />
 }
+Image.displayName = displayName('Image')
 
-export const imageVariants = cva('', {
-  variants: {
-    ...baseVariants(['fullWidth']),
-    autoHeight: {
-      true: 'h-auto',
-    },
-  },
-})
+export { Image, type ImageProps }

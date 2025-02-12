@@ -1,6 +1,6 @@
 {
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
@@ -34,29 +34,27 @@
     }
   ],
   "files.associations": {
-    "*.css": "tailwindcss",
-    "*.js": "javascript",
-    "*.jsx": "javascriptreact",
-    "*.ts": "typescript",
-    "*.tsx": "typescriptreact"
+    "*.css": "tailwindcss"
   },
-  "html.format.indentInnerHtml": true,
-  "html.format.unformatted": "html,style",
   "i18n-ally.enabledFrameworks": ["next-intl"],
   "i18n-ally.keystyle": "nested",
-  "i18n-ally.localesPaths": ["./apps/elearning/static/translations"],
+  "i18n-ally.localesPaths": ["./apps/elearning/config/translations"],
   "prettier.ignorePath": "",
   "search.useIgnoreFiles": true,
   "tailwindCSS.experimental.classRegex": [
-    ["cn\\(((?:[^()]|\\([^()]*\\))*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    // String variables
+    ["(?:\\b(?:const|let)\\s+)?[\\w$_]*(?:[Ss]tyles|[Cc]lasses|[Cc]lassnames)[\\w\\d]*\\s*(?:=|\\+=)\\s*['\"]([^'\"]*)['\"]"],
+    // Plain objects
+    ":\\s*?[\"'`]([^\"'`]*).*?,",
+    // Utility functions
     ["cva\\(((?:[^()]|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-    ["tw\\(((?:[^()]|\\([^()]*\\))*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
-    ["twMerge\\(((?:[^()]|\\([^()]*\\))*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+    ["(?:cn|cx)\\(((?:[^()]|\\([^()]*\\))*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    [
+      "(tw`(?:(?:(?:[^`]*\\$\\{[^]*?\\})[^`]*)+|[^`]*`))",
+      "((?:(?<=`)(?:[^\"'`]*)(?=\\${|`))|(?:(?<=\\})(?:[^\"'`]*)(?=\\${))|(?:(?<=\\})(?:[^\"'`]*)(?=`))|(?:(?<=')(?:[^\"'`]*)(?='))|(?:(?<=\")(?:[^\"'`]*)(?=\"))|(?:(?<=`)(?:[^\"'`]*)(?=`)))"
+    ]
   ],
-  "workbench.colorCustomizations": {
-    "titleBar.activeBackground": "#96a24a",
-    "titleBar.activeForeground": "#ffffff",
-    "titleBar.inactiveBackground": "#96a24a",
-    "titleBar.inactiveForeground": "#ffffff"
-  }
+  "tailwindCSS.experimental.configFile": "./apps/elearning/src/app/globals.css",
+  "tailwindCSS.lint.cssConflict": "error",
+  "tailwindCSS.lint.recommendedVariantOrder": "error"
 }

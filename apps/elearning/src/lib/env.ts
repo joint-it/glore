@@ -1,10 +1,12 @@
 const NODE_ENV = process.env.NODE_ENV
 
 /**
- * Environment variables of the application.
+ * Application environment.
  */
-export const env = {
-  NODE_ENV,
+export const Env = {
   SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL!,
-}
+  isAnalyze: process.env.ANALYZE === 'true',
+  isDevelopment: NODE_ENV === 'development',
+  isProduction: NODE_ENV === 'production',
+} as const

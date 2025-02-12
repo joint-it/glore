@@ -1,30 +1,33 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 
-import * as LabelPrimitive from '@radix-ui/react-label'
+import { Label as LabelBase, type LabelProps as LabelBaseProps } from '@radix-ui/react-label'
 
-import { BASE_VARIANTS, cn, cva, type VariantProps } from '@/lib/cva'
+import { displayName } from '@/lib/utils'
+import { type VariantProps } from '@/theme/types'
+import { cn, cva } from '@/theme/utils'
+import { fontWeight, textColor, textSize } from '@/theme/variants'
 
-export interface LabelProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>, 'color'>,
-    VariantProps<typeof labelVariants> {}
+interface LabelProps extends Omit<LabelBaseProps, 'color'>, VariantProps<typeof label> {}
 
-export const Label = forwardRef<React.ComponentRef<typeof LabelPrimitive.Root>, LabelProps>((props, ref) => {
-  const { className, color, size, weight, ...rest } = props
-  return <LabelPrimitive.Root className={cn(labelVariants({ className, color, size, weight }))} ref={ref} {...rest} />
-})
-
-export const labelVariants = cva(
-  'inline-block cursor-pointer leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-  {
-    defaultVariants: {
-      color: 'base',
-      size: 'sm',
-      weight: 'medium',
-    },
-    variants: {
-      color: BASE_VARIANTS.textColor,
-      size: BASE_VARIANTS.textSize,
-      weight: BASE_VARIANTS.fontWeight,
-    },
+const Label = forwardRef<React.ComponentRef<typeof LabelBase>, LabelProps>(
+  ({ className, color, size, weight, ...props }, ref) => {
+    const styles = useMemo(() => label({ color, size, weight }), [color, size, weight])
+    return <LabelBase className={cn(styles, className)} ref={ref} {...props} />
   },
 )
+Label.displayName = displayName('Label')
+
+const label = cva(`inline-block cursor-pointer leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70`, {
+  defaultVariants: {
+    color: 'base',
+    size: 'sm',
+    weight: 'medium',
+  },
+  variants: {
+    color: textColor,
+    size: textSize,
+    weight: fontWeight,
+  },
+})
+
+export { Label, type LabelProps }

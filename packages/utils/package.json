@@ -1,0 +1,31 @@
+{
+  "name": "@joint-it/utils",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "import": "./build/index.js",
+      "require": "./build/index.cjs",
+      "default": "./build/index.js"
+    }
+  },
+  "prettier": "@joint-it/prettier-config",
+  "scripts": {
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "typecheck": "tsc --noEmit && tsup --silent",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint --fix . && prettier --write .",
+    "check": "pnpm typecheck && pnpm lint"
+  },
+  "devDependencies": {
+    "@joint-it/prettier-config": "workspace:^",
+    "@joint-it/tsconfig": "workspace:^",
+    "@joint-it/tsup-config": "workspace:^",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:"
+  }
+}

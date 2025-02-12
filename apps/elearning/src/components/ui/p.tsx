@@ -1,22 +1,23 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 
-import { BASE_VARIANTS, cn, cva, type VariantProps } from '@/lib/cva'
+import { displayName } from '@/lib/utils'
+import { type VariantProps } from '@/theme/types'
+import { cn, cva } from '@/theme/utils'
+import { textColor, textSize } from '@/theme/variants'
 
-export interface PProps
-  extends Omit<React.HTMLAttributes<HTMLParagraphElement>, 'color'>,
-    VariantProps<typeof pVariants> {}
+interface PProps extends Omit<React.HTMLAttributes<HTMLParagraphElement>, 'color'>, VariantProps<typeof p> {}
 
-export const P = forwardRef<HTMLParagraphElement, PProps>((props, ref) => {
-  const { className, color, size, ...rest } = props
-  return <p className={cn(pVariants({ className, color, size }))} ref={ref} {...rest} />
+const P = forwardRef<HTMLParagraphElement, PProps>(({ className, color, ...props }, ref) => {
+  const styles = useMemo(() => p({ color }), [color])
+  return <p className={cn(styles, className)} ref={ref} {...props} />
 })
+P.displayName = displayName('P')
 
-export const pVariants = cva('', {
-  defaultVariants: {
-    color: 'base',
-  },
+const p = cva([], {
   variants: {
-    color: BASE_VARIANTS.textColor,
-    size: BASE_VARIANTS.textSize,
+    color: textColor,
+    size: textSize,
   },
 })
+
+export { P, type PProps }

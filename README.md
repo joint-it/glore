@@ -13,17 +13,17 @@ Visit the website to find out how to sign up to the e-learning platform and get 
 
 ## About
 
-The GloRe eLearning platform is a monorepository including a <a href="https://nextjs.org"><img src="https://raw.githubusercontent.com/jointorg/glore/refs/heads/main/.github/static/next-js.svg" style="height: 12px; margin-right: 2px;">Next.js</a> application backed by <a href="https://supabase.com"><img src="https://raw.githubusercontent.com/jointorg/glore/refs/heads/main/.github/static/supabase.svg" style="height: 12px">Supabase</a> and different utility packages.
+The GloRe eLearning platform is a monorepository including a <a href="https://nextjs.org">Next.js</a> application backed by <a href="https://supabase.com">Supabase</a> and different utility packages.
 
-The project uses <a href="https://tailwindcss.com"><img src="https://raw.githubusercontent.com/jointorg/glore/refs/heads/main/.github/static/tailwind.svg" style="height: 10px">Tailwind CSS</a> and <a href="https://ui.shadcn.com"><img src="https://raw.githubusercontent.com/jointorg/glore/refs/heads/main/.github/static/shadcn.png" style="height: 12px">shadcn/ui</a> components for building the user interface.
+The project uses <a href="https://tailwindcss.com">Tailwind CSS</a> to create a responsive and accessible user interface.
 
-## Contributing
+## Development
 
-If you want to contribute to the project, follow the instructions below to set up your local development environment.
+If you want to run the project locally, follow the instructions below to set up your development environment.
 
 ### Prerequisites
 
-You must download and activate the Node.js version specified [here](https://github.com/francojoint/glore/blob/main/.node-version).
+You must download and activate the Node.js version specified [here](https://github.com/jointorg/glore/blob/main/.node-version).
 
 ### Installation
 
@@ -53,17 +53,19 @@ cd apps/elearning
 cp .env.example .env
 ```
 
-Fill in the environment variables in the file to have access to all services.
+Fill in the required environment variables to gain access to all the services.
 
-### Development
+### Running the Development Server
 
 Run the development server with:
 
 ```bash
-pnpm run dev
+pnpm dev
 ```
 
 Open [localhost:3000](http://localhost:3000) in your browser to see the result. Any changes you make to the code will be reflected in real-time.
+
+## Contributing
 
 To develop new features, create a branch starting from `main`:
 
@@ -77,12 +79,12 @@ Once you are done with your changes, push the branch to the repository and creat
 
 To release new versions of the project, you must copy the `.env.example` file at the root of the project to `.env` and specify the `GITHUB_TOKEN` environment variable.
 
-Then, run the following command to create a new release:
+Then, run the following command to create a new release using [release-it](https://github.com/release-it/release-it):
 
 ```sh
-pnpm run release
+pnpm release
 ```
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE) © [Joint](https://associazionejoint.org)

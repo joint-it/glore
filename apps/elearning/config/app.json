@@ -1,0 +1,18 @@
+{
+  "title": "GloRe",
+  "name": "Glore",
+  "slug": "glore",
+  "slogan": "...",
+  "description": "GloRe Certificate",
+  "version": "0.1.0",
+  "url": "https://elearning.glorecertificate.net",
+  "keywords": ["glore", "certificate"],
+  "image": "https://elearning.glorecertificate.net/opengraph.png",
+  "email": "info@glorecertificate.net",
+  "phone": "+390256568779",
+  "themeColor": "#ffffff",
+  "author": {
+    "name": "Gabriele Canepa",
+    "url": "https://gabrielecanepa.com"
+  }
+}

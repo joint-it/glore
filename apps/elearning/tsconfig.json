@@ -1,12 +1,12 @@
 {
-  "extends": "@glore/tsconfig/nextjs",
+  "extends": "@joint-it/tsconfig/nextjs",
   "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "#/*": ["./static/*"]
-    }
+      "@/*": ["./src/*"]
+    },
+    "noEmit": true
   }
 }

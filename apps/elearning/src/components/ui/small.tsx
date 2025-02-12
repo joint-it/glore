@@ -1,12 +1,13 @@
 import { forwardRef } from 'react'
 
-import { cn, cva, type VariantProps } from '@/lib/cva'
+import { displayName } from '@/lib/utils'
+import { cn } from '@/theme/utils'
 
-export interface SmallProps extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof smallVariants> {}
+interface SmallProps extends React.HTMLAttributes<HTMLElement> {}
 
-export const Small = forwardRef<HTMLElement, SmallProps>((props, ref) => {
-  const { className, ...rest } = props
-  return <small className={cn(smallVariants({ className }))} ref={ref} {...rest} />
-})
+const Small = forwardRef<HTMLElement, SmallProps>(({ className, ...props }, ref) => (
+  <small className={cn('text-sm leading-none font-medium', className)} ref={ref} {...props} />
+))
+Small.displayName = displayName('Small')
 
-export const smallVariants = cva('text-sm leading-none font-medium')
+export { Small, type SmallProps }

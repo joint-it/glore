@@ -1,10 +1,11 @@
 {
   "recommendations": [
-    "bradlc.vscode-tailwindcss",
+    "csstools.postcss",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "lokalise.i18n-ally",
     "timonwong.shellcheck",
-    "vivaxy.vscode-conventional-commits"
+    "vivaxy.vscode-conventional-commits",
+    "bradlc.vscode-tailwindcss"
   ]
 }

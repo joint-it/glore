@@ -1,19 +1,13 @@
 import { forwardRef } from 'react'
 
-import { baseVariants, cn, cva, type VariantProps } from '@/lib/cva'
+import { displayName } from '@/lib/utils'
+import { cn } from '@/theme/utils'
 
-export interface H3Props extends React.HTMLAttributes<HTMLHeadingElement>, VariantProps<typeof h3Variants> {}
+interface H3Props extends React.HTMLAttributes<HTMLHeadingElement> {}
 
-export const H3 = forwardRef<HTMLHeadingElement, H3Props>((props, ref) => {
-  const { className, fontWeight, ...rest } = props
-  return <h3 className={cn(h3Variants({ className, fontWeight }))} ref={ref} {...rest} />
-})
+const H3 = forwardRef<HTMLHeadingElement, H3Props>(({ className, ...props }, ref) => (
+  <h3 className={cn('text-3xl font-bold', className)} ref={ref} {...props} />
+))
+H3.displayName = displayName('H3')
 
-export const h3Variants = cva('text-3xl font-bold dark:text-white', {
-  defaultVariants: {
-    fontWeight: 'semibold',
-  },
-  variants: {
-    ...baseVariants(['fontWeight']),
-  },
-})
+export { H3, type H3Props }

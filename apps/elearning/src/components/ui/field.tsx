@@ -1,49 +1,53 @@
 import { forwardRef, useMemo } from 'react'
 
+import { Input, type InputProps } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { P } from '@/components/ui/p'
-import { baseVariants, cn, cva, type VariantProps } from '@/lib/cva'
-import { decreaseVariantSize } from '@/lib/utils'
+import { displayName } from '@/lib/utils'
+import { SemanticColor, Sizing } from '@/theme/enums'
+import type { VariantProps } from '@/theme/types'
+import { cn, cva } from '@/theme/utils'
+import { fullWidth } from '@/theme/variants'
 
-import { box } from './box'
-import { Input, type InputProps } from './input'
-import { Label } from './label'
-
-export interface FieldProps extends InputProps, VariantProps<typeof fieldVariants> {
+interface FieldProps extends Omit<InputProps, 'fullWidth'>, VariantProps<typeof field> {
+  color?: SemanticColor
   id: string
   label?: React.ReactNode
   message?: React.ReactNode
+  size?: Sizing
 }
 
-export const Field = forwardRef<HTMLInputElement, FieldProps>((props, ref) => {
-  const { className, color, fullWidth, gap, id, label, message, size, ...rest } = props
+const Field = forwardRef<HTMLInputElement, FieldProps>(
+  ({ className, color = SemanticColor.Base, fullWidth, id, label, message, size = Sizing.Md, ...props }, ref) => {
+    const styles = useMemo(() => field({ fullWidth }), [fullWidth])
+    const labelColor = useMemo(() => (['success', 'warning', 'danger'].includes(color) ? color : undefined), [color])
 
-  const labelColor = useMemo(
-    () => (['success', 'warning', 'danger'].includes(color || '') ? color : undefined),
-    [color],
-  )
+    return (
+      <div className={cn(styles, className)}>
+        {label && (
+          <Label className="mb-2" color={labelColor} htmlFor={id} size={size}>
+            {label}
+          </Label>
+        )}
+        <Input color={color} fullWidth={fullWidth} id={id} ref={ref} size={size} {...props} />
+        {message && (
+          <P className="mt-1" color={labelColor} size={size}>
+            {message}
+          </P>
+        )}
+      </div>
+    )
+  },
+)
+Field.displayName = displayName('Field')
 
-  return (
-    <box.div className={cn(fieldVariants({ className, fullWidth, gap }))}>
-      {label && (
-        <Label className="mb-2" color={labelColor} htmlFor={id} size={size}>
-          {label}
-        </Label>
-      )}
-      <Input color={color} fullWidth={fullWidth} id={id} ref={ref} size={size} {...rest} />
-      {message && (
-        <P className="mt-1" color={labelColor} size={decreaseVariantSize(size || 'md')}>
-          {message}
-        </P>
-      )}
-    </box.div>
-  )
-})
-
-export const fieldVariants = cva([], {
+const field = cva('block', {
   defaultVariants: {
-    gap: 2,
+    fullWidth: true,
   },
   variants: {
-    ...baseVariants(['fullWidth', 'gap']),
+    fullWidth,
   },
 })
+
+export { Field, type FieldProps }

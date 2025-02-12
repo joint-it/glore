@@ -1,0 +1,8 @@
+{
+  "extends": "@joint-it/tsconfig/tsup",
+  "include": ["**/*.ts"],
+  "exclude": ["build", "node_modules"],
+  "compilerOptions": {
+    "types": ["node"]
+  }
+}

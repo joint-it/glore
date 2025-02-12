@@ -5,35 +5,36 @@ import { useCallback, useEffect, useMemo, useRef } from 'react'
 import createGlobe, { type COBEOptions, type Marker } from 'cobe'
 import { useSpring } from 'react-spring'
 
-import { ColorScheme, useColorScheme } from '@/hooks/use-color-scheme'
-import { cn, cva, type VariantProps } from '@/lib/cva'
-import { rgb } from '@/lib/utils'
-import cities from '#/data/cities.json'
+import { useTheme } from '@/hooks/use-theme'
+import { displayName } from '@/lib/utils'
+import { Theme } from '@/theme/enums'
+import type { VariantProps } from '@/theme/types'
+import { cn, cva, rgb } from '@/theme/utils'
+import cities from 'config/cities.json'
 
-interface Colors extends Pick<COBEOptions, 'baseColor' | 'dark' | 'glowColor' | 'markerColor'> {}
+interface GlobeColors extends Pick<COBEOptions, 'baseColor' | 'dark' | 'glowColor' | 'markerColor'> {}
+
+interface GlobeProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof globe> {
+  config?: COBEOptions
+}
 
 const markers: Marker[] = cities.map(({ location, population }) => ({
   location: location as [number, number],
   size: population / 500,
 }))
 
-export interface GlobeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof globeVariants & typeof globeCanvasVariants> {
-  config?: COBEOptions
-}
-
-export const Globe = (props: GlobeProps) => {
+const Globe = (props: GlobeProps) => {
   const { className, config, transition, ...rest } = props
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const pointerInteracting = useRef<number>(null)
   const pointerInteractionMovement = useRef(0)
 
-  const { colorScheme } = useColorScheme()
+  const { theme } = useTheme()
+  const styles = useMemo(() => globe({ transition }), [transition])
 
-  const colors: Colors = useMemo(() => {
-    if (colorScheme === ColorScheme.Dark) {
+  const colors: GlobeColors = useMemo(() => {
+    if (theme === Theme.Dark) {
       return {
         baseColor: rgb(25, 60, 184),
         dark: 0,
@@ -47,7 +48,7 @@ export const Globe = (props: GlobeProps) => {
       glowColor: rgb(236, 238, 220),
       markerColor: rgb(2, 167, 61),
     }
-  }, [colorScheme])
+  }, [theme])
 
   const [{ r }, api] = useSpring(() => ({
     config: {
@@ -138,9 +139,9 @@ export const Globe = (props: GlobeProps) => {
   )
 
   return (
-    <div className={cn(globeVariants({ className }))} {...rest}>
+    <div className="relative m-auto h-full w-full" {...rest}>
       <canvas
-        className={cn(globeCanvasVariants({ transition }))}
+        className={cn(styles, className)}
         onMouseMove={onMouseMove}
         onPointerDown={onPointerDown}
         onPointerOut={onPointerOut}
@@ -155,10 +156,9 @@ export const Globe = (props: GlobeProps) => {
     </div>
   )
 }
+Globe.displayName = displayName('Globe')
 
-export const globeVariants = cva('aspect-1 relative m-auto h-full w-full')
-
-const globeCanvasVariants = cva('h-full w-full cursor-grab', {
+const globe = cva('h-full w-full cursor-grab', {
   variants: {
     transition: {
       true: 'transition-opacity',
@@ -168,3 +168,5 @@ const globeCanvasVariants = cva('h-full w-full cursor-grab', {
     transition: true,
   },
 })
+
+export { Globe, type GlobeProps }

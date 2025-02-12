@@ -3,47 +3,56 @@
 import { redirect } from 'next/navigation'
 import { useCallback, useRef, useState } from 'react'
 
-import { box, Button, Checkbox, Field, Form, Link, type InputProps } from '@/components/ui'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Field } from '@/components/ui/field'
+import { Flex } from '@/components/ui/flex'
+import { Form } from '@/components/ui/form'
+import { Link } from '@/components/ui/link'
 import { useDB } from '@/hooks/use-db'
 import { useTranslations } from '@/hooks/use-translations'
-import { isEmail, isUsername } from '@/lib/utils'
+import { displayName } from '@/lib/utils'
+import { isEmail, isUsername } from '@/lib/validation'
+import { SemanticColor } from '@/theme/enums'
 
-export const LoginForm = () => {
+interface LoginFormProps {}
+
+const LoginForm = () => {
   const db = useDB()
   const t = useTranslations('Auth')
 
   const userRef = useRef<HTMLInputElement>(null)
   const [user, setUser] = useState('')
   const [userError, setUserError] = useState('')
-  const [userColor, setUserColor] = useState<InputProps['color']>('secondary')
+  const [userColor, setUserColor] = useState<SemanticColor>(SemanticColor.Secondary)
 
   const passwordRef = useRef<HTMLInputElement>(null)
   const [password, setPassword] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  const [passwordColor, setPasswordColor] = useState<InputProps['color']>('secondary')
+  const [passwordColor, setPasswordColor] = useState<SemanticColor>(SemanticColor.Secondary)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const onUserChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setUser(event.target.value)
     setUserError('')
-    setUserColor('secondary')
+    setUserColor(SemanticColor.Secondary)
   }, [])
 
   const onPasswordChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value)
     setPasswordError('')
-    setPasswordColor('secondary')
+    setPasswordColor(SemanticColor.Secondary)
   }, [])
 
   const triggerUserError = useCallback((error: string) => {
-    setUserColor('danger')
+    setUserColor(SemanticColor.Danger)
     setUserError(error)
     userRef.current?.focus()
     setIsSubmitting(false)
   }, [])
 
   const triggerPasswordError = useCallback((error: string) => {
-    setPasswordColor('danger')
+    setPasswordColor(SemanticColor.Danger)
     setPasswordError(error)
     passwordRef.current?.focus()
     setIsSubmitting(false)
@@ -70,7 +79,7 @@ export const LoginForm = () => {
     }
 
     const { error } = await db.auth.signInWithPassword({
-      email: profile.email,
+      email: profile.email as string,
       password,
     })
 
@@ -83,7 +92,7 @@ export const LoginForm = () => {
   }, [db, password, t, triggerPasswordError, triggerUserError, user])
 
   return (
-    <Form className="grid w-sm max-w-sm gap-2" onSubmit={onSubmit}>
+    <Form className="grid w-sm max-w-sm gap-2" onSubmit={void onSubmit}>
       <Field
         color={userColor}
         id="user"
@@ -102,13 +111,16 @@ export const LoginForm = () => {
         ref={passwordRef}
         type="password"
       />
-      <box.flex align="center" className="mb-2" justify="between">
+      <Flex align="center" className="mb-2" justify="between">
         <Checkbox color="secondary" id="rememberMe" label={t('rememberMe')} />
         <Link href="/">{t('forgotPassword')}</Link>
-      </box.flex>
+      </Flex>
       <Button color="info" fontWeight="medium" fullWidth loading={isSubmitting} type="submit" variant="gradient">
         {t('login')}
       </Button>
     </Form>
   )
 }
+LoginForm.displayName = displayName('LoginForm')
+
+export { LoginForm, type LoginFormProps }

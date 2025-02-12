@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "@joint-it/tsup",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "noEmit": true
+  }
+}

@@ -1,18 +1,21 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
   "tasks": {
     "dev": {
-      "persistent": true,
       "cache": false,
-      "interactive": true
+      "interactive": true,
+      "persistent": true
     },
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "build/**"]
     },
     "build:watch": {
-      "dependsOn": ["^build:watch"],
-      "outputs": [".next/**", "!.next/cache/**", "build/**"]
+      "cache": false,
+      "interactive": true,
+      "outputs": ["build/**"],
+      "persistent": true
     },
     "start": {
       "dependsOn": ["^start"]
@@ -27,7 +30,7 @@
       "dependsOn": ["^lint"]
     },
     "lint:fix": {
-      "dependsOn": ["^lint:fix"]
+      "dependsOn": ["^format"]
     },
     "check": {
       "dependsOn": ["^check"]

@@ -1,11 +1,17 @@
 import { forwardRef } from 'react'
 
-import { cn, cva, type VariantProps } from '@/lib/cva'
+import { displayName } from '@/lib/utils'
+import { cn } from '@/theme/utils'
 
-export interface CodeProps extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof codeVariants> {}
+interface CodeProps extends React.HTMLAttributes<HTMLElement> {}
 
-export const Code = forwardRef<HTMLElement, CodeProps>(({ className, ...props }, ref) => (
-  <code className={cn(codeVariants({ className }))} ref={ref} {...props} />
+const Code = forwardRef<HTMLElement, CodeProps>(({ className, ...props }, ref) => (
+  <code
+    className={cn('relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold', className)}
+    ref={ref}
+    {...props}
+  />
 ))
+Code.displayName = displayName('Code')
 
-export const codeVariants = cva('rounded relative bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold')
+export { Code, type CodeProps }

@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
 
-node_modules/.bin/supabase init >/dev/null 2>&1
-
-exit 0
+node_modules/.bin/supabase init --force --with-intellij-settings=false --with-vscode-settings=false
+pnpm typegen
