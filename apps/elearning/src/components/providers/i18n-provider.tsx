@@ -1,5 +1,8 @@
 import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
 
-export type I18nProviderProps = Parameters<typeof NextIntlClientProvider>[0]
+type I18nProviderProps = Parameters<typeof NextIntlClientProvider>[0]
 
-export const I18nProvider = (props: I18nProviderProps) => <NextIntlClientProvider {...props} />
+const I18nProvider = async (props: I18nProviderProps) => <NextIntlClientProvider messages={await getMessages()} {...props} />
+
+export { I18nProvider, type I18nProviderProps }

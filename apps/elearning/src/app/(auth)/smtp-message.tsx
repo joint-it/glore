@@ -1,4 +1,4 @@
-import { ExternalLink } from '@/components/ui'
+import { ExternalLink } from '@/components/ui/tooltip'
 
 export default () => (
   <div>

@@ -1,11 +1,16 @@
 import { forwardRef } from 'react'
 
-import { cn, cva, type VariantProps } from '@/lib/cva'
+import { css, cx } from 'styled-system/css'
 
-export interface LargeProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof largeVariants> {}
+interface LargeProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const Large = forwardRef<HTMLDivElement, LargeProps>(({ className, ...props }, ref) => (
-  <div className={cn(largeVariants({ className }))} ref={ref} {...props} />
+const Large = forwardRef<HTMLDivElement, LargeProps>(({ className, ...props }, ref) => (
+  <div className={cx(styles, className)} ref={ref} {...props} />
 ))
 
-export const largeVariants = cva('text-lg font-semibold')
+const styles = css({
+  fontSize: 'xl',
+  fontWeight: 'semibold',
+})
+
+export { Large, type LargeProps }

@@ -1,0 +1,8 @@
+{
+  "extends": "@jointorg/tsconfig",
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "noEmit": true
+  }
+}

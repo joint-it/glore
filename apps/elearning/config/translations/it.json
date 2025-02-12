@@ -1,0 +1,20 @@
+{
+  "App": {
+    "description": "GloRe è una rete aperta che mira ad allargare il suo pubblico sia di volontari che di ONG di tutto il mondo per rendere i certificati disponibili a tutti.",
+    "slogan": "Un modo facile e professionale per certificare le tue esperienze di volontariato"
+  },
+  "Auth": {
+    "forgotPassword": "Password dimenticata?",
+    "login": "Accedi",
+    "loginTitle": "Accedi al tuo account GloRe",
+    "loginSubtitle": "Inserisci il tuo username o la tua mail per accedere all'account",
+    "rememberMe": "Ricordami",
+    "passwordLabel": "Password",
+    "passwordInvalid": "Password non valida",
+    "passwordRequired": "Inserisci una password",
+    "userLabel": "Email o username",
+    "userInvalid": "Email o username non validi",
+    "userNotFound": "Utente non trovato",
+    "userRequired": "Inserisci una email o username"
+  }
+}

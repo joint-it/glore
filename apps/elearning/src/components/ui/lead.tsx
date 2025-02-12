@@ -1,11 +1,16 @@
 import { forwardRef } from 'react'
 
-import { cn, cva, type VariantProps } from '@/lib/cva'
+import { css, cx } from 'styled-system/css'
 
-export interface LeadProps extends React.HTMLAttributes<HTMLParagraphElement>, VariantProps<typeof leadVariants> {}
+interface LeadProps extends React.HTMLAttributes<HTMLParagraphElement> {}
 
-export const Lead = forwardRef<HTMLParagraphElement, LeadProps>(({ className, ...props }, ref) => (
-  <p className={cn(leadVariants({ className }))} ref={ref} {...props} />
+const Lead = forwardRef<HTMLParagraphElement, LeadProps>(({ className, ...props }, ref) => (
+  <p className={cx(styles, className)} ref={ref} {...props} />
 ))
 
-export const leadVariants = cva('text-xl text-muted-foreground')
+const styles = css({
+  fontSize: 'xl',
+  color: 'text.muted',
+})
+
+export { Lead, type LeadProps }

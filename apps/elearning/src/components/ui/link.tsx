@@ -1,25 +1,33 @@
 import NextLink, { type LinkProps as NextLinkProps } from 'next/link'
+import { forwardRef } from 'react'
 
-import { cn, cva, type VariantProps } from '@/lib/cva'
+import { css, cx } from 'styled-system/css'
 
-export interface LinkProps extends React.PropsWithChildren<NextLinkProps>, VariantProps<typeof linkVariants> {
+interface LinkProps extends React.PropsWithChildren<NextLinkProps> {
   className?: string
 }
 
-export const Link = (props: LinkProps) => {
+const Link = forwardRef<typeof NextLink, LinkProps>(({ className, ...props }) => (
+  <NextLink className={cx(styles, className)} {...props} />
+))
+
+interface ExternalLinkProps extends React.PropsWithChildren<React.AnchorHTMLAttributes<HTMLAnchorElement>> {}
+
+const ExternalLink = (props: ExternalLinkProps) => {
   const { className, ...rest } = props
-  return <NextLink className={cn(linkVariants({ className }))} {...rest} />
+  return <a className={cx(styles, className)} {...rest} />
 }
 
-export interface ExternalLinkProps
-  extends React.PropsWithChildren<React.AnchorHTMLAttributes<HTMLAnchorElement>>,
-    VariantProps<typeof linkVariants> {}
+const styles = css({
+  fontSize: 'sm',
+  textUnderlineOffset: '4',
+  _hover: {
+    textDecoration: 'underline',
+  },
+  _focusVisible: {
+    textDecoration: 'underline',
+    outline: 'none',
+  },
+})
 
-export const ExternalLink = (props: ExternalLinkProps) => {
-  const { className, ...rest } = props
-  return <a className={cn(linkVariants({ className }))} {...rest} />
-}
-
-export const linkVariants = cva(
-  'text-sm underline-offset-4 hover:underline focus-visible:underline focus-visible:outline-none',
-)
+export { Link, ExternalLink, type LinkProps, type ExternalLinkProps }

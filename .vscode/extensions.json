@@ -1,6 +1,7 @@
 {
   "recommendations": [
-    "bradlc.vscode-tailwindcss",
+    "chakra-ui.panda-css-vscode",
+    "csstools.postcss",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "lokalise.i18n-ally",

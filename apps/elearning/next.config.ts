@@ -1,24 +1,30 @@
-import withBundleAnalyzer from '@next/bundle-analyzer'
+import { resolve } from 'node:path'
+
+import bundleAnalyzer from '@next/bundle-analyzer'
 import { type NextConfig } from 'next'
 
 import { next } from 'million/compiler'
-import createNextIntlPlugin from 'next-intl/plugin'
+import nextIntl from 'next-intl/plugin'
 
-type BundleAnalyzerConfig = Parameters<typeof withBundleAnalyzer>[0]
-type NextConfigMillion = Parameters<typeof next>[0]
+type BundleAnalyzerConfig = Parameters<typeof bundleAnalyzer>[0]
 type MillionConfig = Parameters<typeof next>[1]
+type NextConfigMillion = Parameters<typeof next>[0]
 
-const I18N_REQUEST_PATH = './src/services/i18n/request.ts'
+const I18N_MIDDLEWARE = resolve(__dirname, 'src/services/i18n.ts')
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   webpack: config => ({
     ...config,
     watchOptions: {
-      poll: 1000,
       aggregateTimeout: 500,
+      poll: 1000,
     },
   }),
+}
+
+const bundleAnalyzerConfig: BundleAnalyzerConfig = {
+  enabled: process.env.ANALYZE === 'true',
 }
 
 const millionConfig: MillionConfig = {
@@ -28,10 +34,7 @@ const millionConfig: MillionConfig = {
   telemetry: false,
 }
 
-const bundleAnalyzerConfig: BundleAnalyzerConfig = {
-  enabled: process.env.ANALYZE === 'true',
-}
+const withBundleAnalyzer = bundleAnalyzer(bundleAnalyzerConfig)(nextConfig)
+const withNextIntl = nextIntl(I18N_MIDDLEWARE)(withBundleAnalyzer)
 
-export default createNextIntlPlugin(I18N_REQUEST_PATH)(
-  next(withBundleAnalyzer(bundleAnalyzerConfig)(nextConfig) as NextConfigMillion, millionConfig),
-)
+export default next(withNextIntl as NextConfigMillion, millionConfig)

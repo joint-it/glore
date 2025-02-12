@@ -1,13 +1,18 @@
-import { type BlockquoteHTMLAttributes } from 'react'
+import { forwardRef, type BlockquoteHTMLAttributes } from 'react'
 
-import { cn, cva, type VariantProps } from '@/lib/cva'
+import { css, cx } from 'styled-system/css'
 
-export interface BlockquoteProps
-  extends BlockquoteHTMLAttributes<HTMLElement>,
-    VariantProps<typeof blockquoteVariants> {}
+interface BlockquoteProps extends BlockquoteHTMLAttributes<HTMLElement> {}
 
-export const Blockquote = ({ className, ...props }: BlockquoteProps) => (
-  <blockquote className={cn(blockquoteVariants({ className }))} {...props} />
-)
+const Blockquote = forwardRef<React.ComponentRef<'blockquote'>, BlockquoteProps>(({ className, ...props }, ref) => (
+  <blockquote className={cx(styles, className)} ref={ref} {...props} />
+))
 
-export const blockquoteVariants = cva('mt-6 border-l-2 pl-6 italic')
+const styles = css({
+  borderLeftWidth: '2',
+  fontStyle: 'italic',
+  marginTop: '6',
+  paddingLeft: '6',
+})
+
+export { Blockquote, type BlockquoteProps }

@@ -2,12 +2,10 @@
 
 import { useCallback } from 'react'
 
-import { cn, cva, type VariantProps } from '@/lib/cva'
+interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {}
 
-export interface FormProps extends React.FormHTMLAttributes<HTMLFormElement>, VariantProps<typeof formVariants> {}
-
-export const Form = (props: FormProps) => {
-  const { children, className, onSubmit, ...rest } = props
+const Form = (props: FormProps) => {
+  const { onSubmit, ...rest } = props
 
   const onFormSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,11 +15,7 @@ export const Form = (props: FormProps) => {
     [onSubmit],
   )
 
-  return (
-    <form {...rest} className={cn(formVariants({ className }))} onSubmit={onFormSubmit}>
-      {children}
-    </form>
-  )
+  return <form {...rest} onSubmit={onFormSubmit} />
 }
 
-export const formVariants = cva()
+export { Form, type FormProps }

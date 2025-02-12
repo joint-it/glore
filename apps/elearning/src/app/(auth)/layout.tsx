@@ -1,4 +1,4 @@
-import { box, Globe, Image, Link, LocaleSwitcher } from '@/components/ui'
+import { box, Globe, Image, Link, LocaleSwitcher } from '@/components/ui/tooltip'
 
 export default ({ children }: React.PropsWithChildren) => (
   <box.flex className="min-h-svh overflow-hidden p-6 md:p-10" direction="col" gap={4} relative>

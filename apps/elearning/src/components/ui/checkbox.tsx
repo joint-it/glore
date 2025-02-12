@@ -1,18 +1,17 @@
-import { forwardRef, useCallback, type InputHTMLAttributes } from 'react'
+import { forwardRef, useCallback, useMemo, type InputHTMLAttributes } from 'react'
 
-import { cn, cva, type VariantProps } from '@/lib/cva'
+import { Label } from '@/components/ui/label'
+import { SemanticShade } from '@/theme/enums'
+import { semanticVariant } from '@/theme/utils'
+import { cx, sva, type RecipeVariant } from 'styled-system/css'
+import { Flex } from 'styled-system/jsx'
 
-import { box } from './box'
-import { Label } from './label'
-
-export interface CheckboxProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'color'>,
-    VariantProps<typeof checkboxVariants> {
+interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'color'>, RecipeVariant<typeof checkbox> {
   label?: React.ReactNode
 }
 
-export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
-  const { className, color, id, label, ...rest } = props
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({ className, color, id, label, ...props }, ref) => {
+  const styles = useMemo(() => checkbox({ color }), [color])
 
   const onKeyDown = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
@@ -21,59 +20,58 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
     }
   }, [])
 
-  const InputBase = (
-    <input
-      className={cn(checkboxVariants({ className, color }))}
-      id={id}
-      onKeyDown={onKeyDown}
-      ref={ref}
-      {...rest}
-      type="checkbox"
-    />
+  const InputBase = useMemo(
+    () => <input className={cx(styles.input, className)} id={id} onKeyDown={onKeyDown} ref={ref} {...props} type="checkbox" />,
+    [className, id, onKeyDown, props, ref, styles.input],
   )
 
   return label ? (
-    <box.flex align="center">
+    <Flex align="center">
       {InputBase}
-      <Label className="ml-2" htmlFor={id}>
+      <Label className={styles.label} htmlFor={id}>
         {label}
       </Label>
-    </box.flex>
+    </Flex>
   ) : (
     InputBase
   )
 })
 
-export const checkboxVariants = cva(
-  [
-    [
-      'w-4',
-      'h-4',
-      'bg-gray-100',
-      'border-gray-300',
-      'ring-offset-1',
-      'outline-none',
-      'border',
-      'rounded-sm',
-      'cursor-pointer',
-    ],
-    ['focus:ring-2', 'active:outline-1', 'active:ring-offset-0'],
-    ['dark:ring-offset-gray-800', 'dark:bg-gray-700', 'dark:border-gray-600'],
-  ],
-  {
-    defaultVariants: {
-      color: 'primary',
-    },
-    variants: {
-      color: {
-        base: ['text-gray-900', 'focus:ring-gray-300', 'dark:focus:ring-gray-600'],
-        danger: ['text-red-600', 'focus:ring-red-500', 'dark:focus:ring-red-600'],
-        info: ['text-blue-600', 'focus:ring-blue-500', 'dark:focus:ring-blue-600'],
-        primary: ['text-primary', 'focus:ring-primary-light', 'dark:focus:ring-primary'],
-        secondary: ['text-sky-600', 'focus:ring-sky-600', 'dark:focus:ring-sky-600'],
-        success: ['text-green-600', 'focus:ring-green-500', 'dark:focus:ring-green-600'],
-        warning: ['text-yellow-400', 'focus:ring-yellow-500', 'dark:focus:ring-yellow-600'],
+const checkbox = sva({
+  slots: ['input', 'label'],
+  base: {
+    input: {
+      width: '4',
+      height: '4',
+      background: 'gray.100',
+      borderWidth: '1',
+      borderColor: 'gray.300',
+      outline: 'none',
+      shadow: 'ring.1',
+      borderRadius: 'sm',
+      cursor: 'pointer',
+      _focus: {
+        shadow: 'ring.2',
+      },
+      _active: {
+        outlineWidth: '1',
+        boxShadow: 'none',
       },
     },
+    label: {
+      marginLeft: '2',
+    },
   },
-)
+  variants: {
+    color: semanticVariant(color => ({
+      input: {
+        background: color(),
+        _focus: {
+          shadowColor: color(SemanticShade.Light),
+        },
+      },
+    })),
+  },
+})
+
+export { Checkbox, type CheckboxProps }

@@ -1,17 +1,18 @@
 {
-  "name": "@glore/prettier-config",
+  "name": "@jointorg/prettier-config",
   "version": "0.0.0",
   "type": "module",
-  "main": "./src/index.js",
-  "prettier": "./src/index.js",
+  "main": "./build/index.js",
+  "prettier": "./build/index.js",
   "scripts": {
-    "lint": "eslint . && prettier --check .",
-    "lint:fix": "eslint --fix . && prettier --write .",
-    "check": "pnpm run lint"
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "prettier --check .",
+    "format": "prettier --write .",
+    "check": "pnpm run typecheck && pnpm run lint"
   },
   "devDependencies": {
-    "@glore/eslint-config": "workspace:^",
-    "eslint": "catalog:",
     "prettier": "catalog:"
   }
 }

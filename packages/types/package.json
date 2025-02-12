@@ -1,0 +1,22 @@
+{
+  "name": "@jointorg/types",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "prettier": "@jointorg/prettier-config",
+  "scripts": {
+    "typecheck": "tsc",
+    "lint": "eslint . && prettier --check .",
+    "format": "eslint --fix . && prettier --write .",
+    "check": "pnpm run typecheck && pnpm run lint"
+  },
+  "devDependencies": {
+    "@jointorg/eslint-config": "workspace:^",
+    "@jointorg/prettier-config": "workspace:^",
+    "@jointorg/tsconfig": "workspace:^",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
+  }
+}

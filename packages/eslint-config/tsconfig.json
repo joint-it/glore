@@ -1,0 +1,12 @@
+{
+  "extends": "@jointorg/tsconfig/tsup",
+  "include": ["**/*.ts"],
+  "exclude": ["build", "node_modules"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["node"]
+  }
+}

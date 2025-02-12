@@ -1,19 +1,30 @@
 #!/usr/bin/env sh
 
+R="\033[0;31m"
+G="\033[0;32m"
+B="\033[0;36m"
+NC="\033[0m"
+CUT="\r\033[1A\033[0K"
+
+SUPABASE_SCHEMAS=auth,public
+SUPABASE_TYPES_PATH=supabase/types.ts
+
 . .env
 
 if [ -z "$NEXT_PUBLIC_SUPABASE_URL" ]; then
-  echo "Error: NEXT_PUBLIC_SUPABASE_URL must be set"
+  echo "${R}Error: NEXT_PUBLIC_SUPABASE_URL must be set\n"
   exit 1
 fi
 
-DB_TYPES_PATH=src/services/db/types/database.types.ts
-SUPABASE_PROJECT_ID=$(echo "$NEXT_PUBLIC_SUPABASE_URL" | sed -E 's/https:\/\/([^.]+).*/\1/')
-SUPABASE_SCHEMAS=auth,public
+supabase_project_id=$(echo "$NEXT_PUBLIC_SUPABASE_URL" | sed -E 's/https:\/\/([^.]+).*/\1/')
 
-if node_modules/.bin/supabase gen types typescript --project-id="$SUPABASE_PROJECT_ID" --schema "$SUPABASE_SCHEMAS" > "$DB_TYPES_PATH"; then
-  if ! (eslint --fix "$DB_TYPES_PATH" && prettier --write "$DB_TYPES_PATH") >/dev/null 2>&1; then
-    echo "Failed to format $DB_TYPES_PATH"
-    exit 1
-  fi
+if node_modules/.bin/supabase gen types typescript --project-id="$supabase_project_id" --schema "$SUPABASE_SCHEMAS" > "$SUPABASE_TYPES_PATH"; then
+  echo "${G}✔️ $B\`supabase/types\`$NC: types generated from supabase"
 fi
+
+if ! node_modules/.bin/panda codegen "$*" 2>/dev/null; then
+  echo "${R}✘ $B\`panda\`$NC: code generation failed"
+  exit 1
+fi
+
+echo "${CUT}Finished types generation."

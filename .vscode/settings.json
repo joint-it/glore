@@ -1,6 +1,6 @@
 {
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
@@ -34,29 +34,21 @@
     }
   ],
   "files.associations": {
-    "*.css": "tailwindcss",
-    "*.js": "javascript",
-    "*.jsx": "javascriptreact",
-    "*.ts": "typescript",
-    "*.tsx": "typescriptreact"
+    "*.css": "postcss"
   },
-  "html.format.indentInnerHtml": true,
-  "html.format.unformatted": "html,style",
   "i18n-ally.enabledFrameworks": ["next-intl"],
   "i18n-ally.keystyle": "nested",
-  "i18n-ally.localesPaths": ["./apps/elearning/static/translations"],
+  "i18n-ally.localesPaths": ["./apps/elearning/config/translations"],
+  "panda.color-hints.color-preview.enabled": true,
+  "panda.diagnostics.invalid-token-path": "error",
+  "panda.hovers.display.mode": "nested",
+  "panda.hovers.instances.enabled": true,
+  "panda.hovers.semantic-colors.enabled": true,
+  "panda.hovers.tokens.conditions.enabled": true,
+  "panda.hovers.tokens.css-preview.enabled": true,
+  "panda.hovers.tokens.enabled": true,
+  "panda.inlay-hints.enabled": false,
+  "panda.rem-to-px.enabled": true,
   "prettier.ignorePath": "",
-  "search.useIgnoreFiles": true,
-  "tailwindCSS.experimental.classRegex": [
-    ["cn\\(((?:[^()]|\\([^()]*\\))*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
-    ["cva\\(((?:[^()]|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-    ["tw\\(((?:[^()]|\\([^()]*\\))*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
-    ["twMerge\\(((?:[^()]|\\([^()]*\\))*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
-  ],
-  "workbench.colorCustomizations": {
-    "titleBar.activeBackground": "#96a24a",
-    "titleBar.activeForeground": "#ffffff",
-    "titleBar.inactiveBackground": "#96a24a",
-    "titleBar.inactiveForeground": "#ffffff"
-  }
+  "search.useIgnoreFiles": true
 }

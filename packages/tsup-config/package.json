@@ -1,0 +1,29 @@
+{
+  "name": "@jointorg/tsup-config",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "import": "./build/index.js",
+      "require": "./build/index.cjs",
+      "default": "./build/index.js"
+    }
+  },
+  "prettier": "@jointorg/prettier-config",
+  "scripts": {
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "typecheck": "tsc --noEmit && tsup --silent",
+    "lint": "prettier --check .",
+    "format": "prettier --write .",
+    "check": "pnpm run typecheck && pnpm run lint"
+  },
+  "devDependencies": {
+    "@jointorg/prettier-config": "workspace:^",
+    "@jointorg/tsconfig": "workspace:^",
+    "prettier": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:"
+  }
+}

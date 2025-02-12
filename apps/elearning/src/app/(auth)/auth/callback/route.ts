@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-import { getDB } from '@/services/db'
+import { getDB } from '@/db'
 
 export const GET = async (request: Request) => {
   const { origin, searchParams } = new URL(request.url)

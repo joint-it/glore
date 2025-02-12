@@ -1,11 +1,16 @@
 import { forwardRef } from 'react'
 
-import { cn, cva, type VariantProps } from '@/lib/cva'
+import { css, cx } from 'styled-system/css'
 
-export interface H2Props extends React.HTMLAttributes<HTMLHeadingElement>, VariantProps<typeof h2Variants> {}
+interface H2Props extends React.HTMLAttributes<HTMLHeadingElement> {}
 
-export const H2 = forwardRef<HTMLHeadingElement, H2Props>(({ className, ...props }, ref) => (
-  <h2 className={cn(h2Variants({ className }))} ref={ref} {...props} />
+const H2 = forwardRef<HTMLHeadingElement, H2Props>(({ className, ...props }, ref) => (
+  <h2 className={cx(styles, className)} ref={ref} {...props} />
 ))
 
-export const h2Variants = cva('text-4xl font-bold dark:text-white')
+const styles = css({
+  fontSize: '4xl',
+  fontWeight: 'bold',
+})
+
+export { H2, type H2Props }

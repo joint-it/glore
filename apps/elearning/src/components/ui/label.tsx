@@ -2,29 +2,41 @@ import { forwardRef } from 'react'
 
 import * as LabelPrimitive from '@radix-ui/react-label'
 
-import { BASE_VARIANTS, cn, cva, type VariantProps } from '@/lib/cva'
+import { SemanticColor, SemanticShade, type Sizing } from '@/theme/enums'
+import { type VariantProps } from '@/theme/types'
+import { semanticVariant } from '@/theme/utils'
+import { css, cva, cx } from 'styled-system/css'
 
-export interface LabelProps
+interface LabelProps
   extends Omit<React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>, 'color'>,
-    VariantProps<typeof labelVariants> {}
+    VariantProps<typeof label> {
+  size?: Sizing
+}
 
-export const Label = forwardRef<React.ComponentRef<typeof LabelPrimitive.Root>, LabelProps>((props, ref) => {
-  const { className, color, size, weight, ...rest } = props
-  return <LabelPrimitive.Root className={cn(labelVariants({ className, color, size, weight }))} ref={ref} {...rest} />
-})
+const Label = forwardRef<React.ComponentRef<typeof LabelPrimitive.Root>, LabelProps>(
+  ({ className, color, size, ...props }, ref) => (
+    <LabelPrimitive.Root className={cx(css({ textStyle: size }), label({ color }), className)} ref={ref} {...props} />
+  ),
+)
 
-export const labelVariants = cva(
-  'inline-block cursor-pointer leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-  {
-    defaultVariants: {
-      color: 'base',
-      size: 'sm',
-      weight: 'medium',
-    },
-    variants: {
-      color: BASE_VARIANTS.textColor,
-      size: BASE_VARIANTS.textSize,
-      weight: BASE_VARIANTS.fontWeight,
+const label = cva({
+  base: {
+    display: 'inline-block',
+    cursor: 'pointer',
+    lineHeight: 'none',
+    _peerDisabled: {
+      cursor: 'not-allowed',
+      opacity: 0.7,
     },
   },
-)
+  defaultVariants: {
+    color: SemanticColor.Base,
+  },
+  variants: {
+    color: semanticVariant(color => ({
+      color: color(SemanticShade.Dark),
+    })),
+  },
+})
+
+export { Label, type LabelProps }

@@ -3,10 +3,14 @@
 import { redirect } from 'next/navigation'
 import { useCallback, useRef, useState } from 'react'
 
-import { box, Button, Checkbox, Field, Form, Link, type InputProps } from '@/components/ui'
+import { SemanticColor } from '@/lib/theme'
+
+import { Field } from '@/components/ui/field'
+import { Form } from '@/components/ui/form'
+import { type InputProps } from '@/components/ui/input'
 import { useDB } from '@/hooks/use-db'
 import { useTranslations } from '@/hooks/use-translations'
-import { isEmail, isUsername } from '@/lib/utils'
+import { isEmail, isUsername } from '@/lib/validations'
 
 export const LoginForm = () => {
   const db = useDB()
@@ -15,35 +19,35 @@ export const LoginForm = () => {
   const userRef = useRef<HTMLInputElement>(null)
   const [user, setUser] = useState('')
   const [userError, setUserError] = useState('')
-  const [userColor, setUserColor] = useState<InputProps['color']>('secondary')
+  const [userColor, setUserColor] = useState<InputProps['color']>(SemanticColor.Secondary)
 
   const passwordRef = useRef<HTMLInputElement>(null)
   const [password, setPassword] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  const [passwordColor, setPasswordColor] = useState<InputProps['color']>('secondary')
+  const [passwordColor, setPasswordColor] = useState<InputProps['color']>(SemanticColor.Secondary)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const onUserChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setUser(event.target.value)
     setUserError('')
-    setUserColor('secondary')
+    setUserColor(SemanticColor.Secondary)
   }, [])
 
   const onPasswordChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value)
     setPasswordError('')
-    setPasswordColor('secondary')
+    setPasswordColor(SemanticColor.Secondary)
   }, [])
 
   const triggerUserError = useCallback((error: string) => {
-    setUserColor('danger')
+    setUserColor(SemanticColor.Danger)
     setUserError(error)
     userRef.current?.focus()
     setIsSubmitting(false)
   }, [])
 
   const triggerPasswordError = useCallback((error: string) => {
-    setPasswordColor('danger')
+    setPasswordColor(SemanticColor.Danger)
     setPasswordError(error)
     passwordRef.current?.focus()
     setIsSubmitting(false)

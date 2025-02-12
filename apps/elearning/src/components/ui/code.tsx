@@ -1,11 +1,21 @@
 import { forwardRef } from 'react'
 
-import { cn, cva, type VariantProps } from '@/lib/cva'
+import { css, cx } from 'styled-system/css'
 
-export interface CodeProps extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof codeVariants> {}
+interface CodeProps extends React.HTMLAttributes<HTMLElement> {}
 
-export const Code = forwardRef<HTMLElement, CodeProps>(({ className, ...props }, ref) => (
-  <code className={cn(codeVariants({ className }))} ref={ref} {...props} />
+const Code = forwardRef<HTMLElement, CodeProps>(({ className, ...props }, ref) => (
+  <code className={cx(styles, className)} ref={ref} {...props} />
 ))
 
-export const codeVariants = cva('rounded relative bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold')
+const styles = css({
+  borderRadius: 'sm',
+  position: 'relative',
+  px: '1',
+  py: '0.5',
+  fontFamily: 'mono',
+  fontSize: 'sm',
+  fontWeight: 'semibold',
+})
+
+export { Code, type CodeProps }
