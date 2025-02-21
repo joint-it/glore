@@ -12,8 +12,7 @@ import prettierConfig from 'eslint-config-prettier'
 // @ts-expect-error - Missing type definitions
 import importPlugin from 'eslint-plugin-import'
 import perfectionistPlugin from 'eslint-plugin-perfectionist'
-// @ts-expect-error - Missing type definitions
-import preferArrowPlugin from 'eslint-plugin-prefer-arrow'
+import preferArrowFunctionsPlugin from 'eslint-plugin-prefer-arrow-functions'
 import prettierPlugin from 'eslint-plugin-prettier'
 import prettierPluginRecommended from 'eslint-plugin-prettier/recommended'
 import reactPlugin from 'eslint-plugin-react'
@@ -107,7 +106,7 @@ const jointConfig = (options: JointConfigOptions = {}): Linter.Config[] => {
         '@stylistic': stylisticPlugin,
         import: importPlugin,
         perfectionist: perfectionistPlugin,
-        'prefer-arrow': preferArrowPlugin,
+        'prefer-arrow-functions': preferArrowFunctionsPlugin,
         'sort-array-values': sortArrayValuesPlugin,
         'sort-destructure-keys': sortDestructureKeysPlugin,
         'unused-imports': importsPlugin,
@@ -155,15 +154,6 @@ const jointConfig = (options: JointConfigOptions = {}): Linter.Config[] => {
           RuleSeverity.Error,
           {
             allowNamedFunctions: true,
-          },
-        ],
-        'prefer-arrow/prefer-arrow-functions': [
-          RuleSeverity.Error,
-          {
-            allowStandaloneDeclarations: true,
-            classPropertiesAllowed: true,
-            disallowPrototype: true,
-            singleReturnOnly: true,
           },
         ],
         'prefer-const': [
@@ -249,6 +239,7 @@ const jointConfig = (options: JointConfigOptions = {}): Linter.Config[] => {
           },
         ],
         'perfectionist/sort-objects': sortObjectKeys === true ? RuleSeverity.Error : RuleSeverity.Off,
+        'prefer-arrow-functions/prefer-arrow-functions': RuleSeverity.Error,
         'sort-array-values/sort-array-values': sortArrayValues === true ? RuleSeverity.Error : RuleSeverity.Off,
         'sort-destructure-keys/sort-destructure-keys': sortDestructuredKeys === true ? RuleSeverity.Error : RuleSeverity.Off,
         'unused-imports/no-unused-imports': RuleSeverity.Error,
@@ -416,6 +407,8 @@ const jointConfig = (options: JointConfigOptions = {}): Linter.Config[] => {
               },
             ],
             'perfectionist/sort-jsx-props': sortProps === true ? RuleSeverity.Error : RuleSeverity.Off,
+            'react/jsx-uses-react': RuleSeverity.Off,
+            'react/react-in-jsx-scope': RuleSeverity.Off,
           },
         }
       : {},
