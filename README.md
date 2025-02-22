@@ -1,8 +1,8 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/jointorg/glore/refs/heads/main/.github/static/glore.png" alt="" width="90" />
+  <img src="https://raw.githubusercontent.com/joint-it/glore/refs/heads/main/.github/static/glore.png" alt="" width="90" />
   <h1>GloRe eLearning</h1>
-  <a href="https://github.com/jointorg/glore/actions/workflows/code-quality.yml">
-    <img src="https://github.com/jointorg/glore/actions/workflows/code-quality.yml/badge.svg" />
+  <a href="https://github.com/joint-it/glore/actions/workflows/code-quality.yml">
+    <img src="https://github.com/joint-it/glore/actions/workflows/code-quality.yml/badge.svg" />
   </a>
 </div>
 <br>
@@ -23,16 +23,16 @@ If you want to run the project locally, follow the instructions below to set up 
 
 ### Prerequisites
 
-You must download and activate the Node.js version specified [here](https://github.com/jointorg/glore/blob/main/.node-version).
+You must download and activate the Node.js version specified [here](https://github.com/joint-it/glore/blob/main/.node-version).
 
 ### Installation
 
 Download the project using the GitHub client or Git:
 
 ```sh
-gh repo clone jointorg/glore
+gh repo clone joint-it/glore
 # or
-git clone https://github.com/jointorg/glore.git
+git clone https://github.com/joint-it/glore.git
 ```
 
 Navigate to the project directory, activate pnpm using Corepack and install the project dependencies:

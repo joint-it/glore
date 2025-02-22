@@ -1,6 +1,5 @@
-import app from 'config/app.json'
+import { cx } from 'class-variance-authority'
+import { type ClassValue } from 'class-variance-authority/types'
+import { twMerge } from 'tailwind-merge'
 
-/**
- * Builds the display name of a component.
- */
-export const displayName = (componentName: string) => `${app.name}${componentName}`
+export const cn = (...inputs: ClassValue[]) => twMerge(cx(inputs))

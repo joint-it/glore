@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-import { withDB } from '@/hooks/with-db'
+import { getDB } from '@/services/db'
 
 export const GET = async (request: Request) => {
   const { origin, searchParams } = new URL(request.url)
@@ -8,7 +8,7 @@ export const GET = async (request: Request) => {
   const redirectTo = searchParams.get('redirect_to')?.toString()
 
   if (code) {
-    const { auth } = await withDB()
+    const { auth } = await getDB()
     await auth.exchangeCodeForSession(code)
   }
 

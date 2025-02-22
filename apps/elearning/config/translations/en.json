@@ -11,10 +11,34 @@
     "rememberMe": "Remember me",
     "passwordLabel": "Password",
     "passwordInvalid": "Invalid password",
-    "passwordRequired": "Insert your password",
+    "passwordRequired": "Insert your password to continue",
     "userLabel": "Email or username",
     "userInvalid": "Invalid email or username",
     "userNotFound": "User not found",
     "userRequired": "Email or username is required"
+  },
+  "Common": {
+    "collapse": "Collapse",
+    "expand": "Expand",
+    "toggle": "Toggle"
+  },
+  "Navigation": {
+    "dashboard": "Dashboard",
+    "modules": "Modules",
+    "modulesInProgress": "In progress",
+    "modulesNotStarted": "Not started",
+    "modulesCompleted": "Completed",
+    "modulesAll": "All modules",
+    "certificates": "Certificates",
+    "certificatesMy": "My certificates",
+    "certificatesUnderReview": "Under review",
+    "certificatesNew": "Request new",
+    "documentation": "Documentation",
+    "documentationIntro": "Introduction",
+    "documentationGetStarted": "Get started",
+    "documentationTutorials": "Tutorials",
+    "documentationChangelog": "Changelog",
+    "inbox": "Inbox",
+    "logout": "Log out"
   }
 }

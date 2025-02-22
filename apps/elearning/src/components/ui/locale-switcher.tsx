@@ -1,11 +1,14 @@
 'use client'
 
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useTransition } from 'react'
 
-import { Select, SelectContent, SelectItem, SelectTrigger, type SelectProps } from '@/components/ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select'
 import { useLocale } from '@/hooks/use-locale'
 import { type Locale } from '@/services/i18n'
+import { cn } from '@/theme/utils'
 import { locales } from 'config/i18n.json'
+
+interface LocaleSwitcherProps {}
 
 const items = Object.entries(locales).map(([value, { flag, name }]) => ({
   label: name,
@@ -13,30 +16,36 @@ const items = Object.entries(locales).map(([value, { flag, name }]) => ({
   icon: flag,
 }))
 
-interface LocaleSwitcherProps extends SelectProps {}
-
 const LocaleSwitcher = (props: LocaleSwitcherProps) => {
   const [locale, setLocale] = useLocale()
+  const [isPending, startTransition] = useTransition()
+
   const activeItem = useMemo(() => items.find(item => item.value === locale), [locale])
 
   const onChange = useCallback(
     (locale: Locale) => {
-      setLocale(locale)
+      startTransition(async () => {
+        await setLocale(locale)
+      })
     },
     [setLocale],
   )
 
   return (
     <Select defaultValue={locale} onValueChange={onChange} {...props}>
-      <SelectTrigger className="rounded-sm p-2 transition-colors hover:bg-slate-200">
+      <SelectTrigger className={cn('w-md', isPending && 'pointer-events-none opacity-60')}>
         <span>
           {activeItem?.label} {activeItem?.icon}
         </span>
       </SelectTrigger>
-      <SelectContent align="end" className="min-w-[8rem] overflow-hidden rounded-sm bg-accent p-y-1 shadow-md" position="popper">
+      <SelectContent align="end" position="popper">
         {items.map(item => (
-          <SelectItem className="flex items-center rounded-sm p-x-3 p-y-2 text-sm" key={item.value} value={item.value}>
-            <span className="text-slate-900">{item.label}</span>
+          <SelectItem
+            className={cn(item.value === activeItem?.value && 'pointer-events-none cursor-default bg-accent')}
+            key={item.value}
+            value={item.value}
+          >
+            <span>{item.label}</span>
           </SelectItem>
         ))}
       </SelectContent>

@@ -2,17 +2,17 @@ import './globals.css'
 
 import { I18nProvider } from '@/components/providers/i18n-provider'
 import { ThemeProvider } from '@/components/providers/theme-provider'
-import { withLocale } from '@/hooks/with-locale'
+import { getLocale } from '@/services/i18n'
 
 export default async ({ children }: React.PropsWithChildren) => {
-  const [locale] = await withLocale()
+  const [locale] = await getLocale()
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body>
-        <ThemeProvider>
-          <I18nProvider>{children}</I18nProvider>
-        </ThemeProvider>
+        <I18nProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </I18nProvider>
       </body>
     </html>
   )

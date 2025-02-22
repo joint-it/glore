@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 import { type Cookie } from '@/lib/storage'
 import { slug } from 'config/app.json'
 
-const getCookie = async <T>(
+export const getCookie = async <T>(
   cookie: Cookie,
   initialValue?: T,
   options = {
@@ -19,7 +19,7 @@ const getCookie = async <T>(
   return JSON.parse(raw) as T
 }
 
-const setCookie = async <T>(
+export const setCookie = async <T>(
   cookie: Cookie,
   value: T,
   options = {
@@ -31,8 +31,3 @@ const setCookie = async <T>(
   store.set(key, JSON.stringify(value))
   return value
 }
-
-export const withCookies = () => ({
-  getCookie,
-  setCookie,
-})

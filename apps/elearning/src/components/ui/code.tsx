@@ -1,6 +1,5 @@
 import { forwardRef } from 'react'
 
-import { displayName } from '@/lib/utils'
 import { cn } from '@/theme/utils'
 
 interface CodeProps extends React.HTMLAttributes<HTMLElement> {}
@@ -12,6 +11,5 @@ const Code = forwardRef<HTMLElement, CodeProps>(({ className, ...props }, ref) =
     {...props}
   />
 ))
-Code.displayName = displayName('Code')
 
 export { Code, type CodeProps }

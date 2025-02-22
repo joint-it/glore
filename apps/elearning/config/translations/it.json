@@ -16,5 +16,17 @@
     "userInvalid": "Email o username non validi",
     "userNotFound": "Utente non trovato",
     "userRequired": "Inserisci una email o username"
+  },
+  "Navigation": {
+    "dashboard": "Pannello di controllo",
+    "modules": "Moduli",
+    "modulesCompleted": "Completati",
+    "modulesInProgress": "In corso",
+    "modulesIntro": "Introduzione",
+    "modulesNotStarted": "Non iniziati",
+    "modulesSkills": "Skills",
+    "certificates": "Certificazioni",
+    "inbox": "Inbox",
+    "logout": "Esci"
   }
 }

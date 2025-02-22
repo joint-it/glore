@@ -10,7 +10,7 @@ type BundleAnalyzerConfig = Parameters<typeof bundleAnalyzer>[0]
 type MillionConfig = Parameters<typeof next>[1]
 type NextConfigMillion = Parameters<typeof next>[0]
 
-const I18N_MIDDLEWARE = './src/services/i18n.ts'
+const I18N_PATH = './src/middlewares/locale.ts'
 const tsconfigPath = Env.isProduction ? 'tsconfig.build.json' : 'tsconfig.json'
 
 const nextConfig: NextConfig = {
@@ -39,6 +39,6 @@ const millionConfig: MillionConfig = {
 }
 
 const withBundleAnalyzer = bundleAnalyzer(bundleAnalyzerConfig)(nextConfig)
-const withNextIntl = nextIntl(I18N_MIDDLEWARE)(withBundleAnalyzer)
+const withNextIntl = nextIntl(I18N_PATH)(withBundleAnalyzer)
 
 export default next(withNextIntl as NextConfigMillion, millionConfig)

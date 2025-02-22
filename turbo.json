@@ -30,7 +30,7 @@
       "dependsOn": ["^lint"]
     },
     "lint:fix": {
-      "dependsOn": ["^format"]
+      "dependsOn": ["^lint:fix"]
     },
     "check": {
       "dependsOn": ["^check"]

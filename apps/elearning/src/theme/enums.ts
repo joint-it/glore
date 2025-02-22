@@ -1,17 +1,14 @@
 export enum Theme {
+  Auto = 'auto',
   Light = 'light',
   Dark = 'dark',
-  System = 'system',
 }
 
 export enum SemanticColor {
-  Base = 'base',
-  Primary = 'primary',
-  Secondary = 'secondary',
   Info = 'info',
+  Failure = 'failure',
   Success = 'success',
   Warning = 'warning',
-  Danger = 'danger',
 }
 
 export enum FontWeight {

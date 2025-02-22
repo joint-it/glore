@@ -6,7 +6,6 @@ import createGlobe, { type COBEOptions, type Marker } from 'cobe'
 import { useSpring } from 'react-spring'
 
 import { useTheme } from '@/hooks/use-theme'
-import { displayName } from '@/lib/utils'
 import { Theme } from '@/theme/enums'
 import type { VariantProps } from '@/theme/types'
 import { cn, cva, rgb } from '@/theme/utils'
@@ -156,7 +155,6 @@ const Globe = (props: GlobeProps) => {
     </div>
   )
 }
-Globe.displayName = displayName('Globe')
 
 const globe = cva('h-full w-full cursor-grab', {
   variants: {

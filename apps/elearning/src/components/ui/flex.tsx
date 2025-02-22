@@ -1,5 +1,4 @@
 import { Box, type BoxProps } from '@/components/ui/box'
-import { displayName } from '@/lib/utils'
 import { type VariantProps } from '@/theme/types'
 import { cn, cva } from '@/theme/utils'
 
@@ -9,7 +8,6 @@ const Flex = (props: FlexProps) => {
   const { align, className, direction, grow, justify, ...rest } = props
   return <Box className={cn(flex({ align, className, direction, grow, justify }))} {...rest} />
 }
-Flex.displayName = displayName('Flex')
 
 const flex = cva('flex', {
   variants: {

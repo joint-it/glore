@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 
-import { displayName } from '@/lib/utils'
 import type { VariantProps } from '@/theme/types'
 import { cn, cva } from '@/theme/utils'
 import { absolute, fullWidth, gap, relative } from '@/theme/variants'
@@ -13,7 +12,6 @@ const Box = (props: BoxProps) => {
 
   return <div className={cn(styles, className)} {...rest} />
 }
-Box.displayName = displayName('Box')
 
 const box = cva('block', {
   variants: {

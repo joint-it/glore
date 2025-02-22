@@ -1,6 +1,6 @@
 import type { ClassValue } from 'class-variance-authority/types'
 
-import type { FontWeight, SemanticColor, TextSizing } from '@/theme/enums'
+import type { FontWeight, TextSizing } from '@/theme/enums'
 import type { Spacing } from '@/theme/types'
 import { vd } from '@/theme/utils'
 
@@ -50,7 +50,7 @@ export const textColor = vd({
   danger: 'text-red-500 dark:text-red-400',
   success: 'text-green-500 dark:text-green-400',
   info: 'text-blue-500 dark:text-blue-400',
-}) satisfies Record<SemanticColor, ClassValue>
+})
 
 export const textSize = vd({
   base: 'text-base',

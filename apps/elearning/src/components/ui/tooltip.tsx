@@ -1,45 +1,43 @@
-import { forwardRef } from 'react'
+'use client'
 
-import {
-  Content,
-  Portal,
-  Provider,
-  Root,
-  Trigger,
-  type TooltipContentProps,
-  type TooltipProps,
-  type TooltipTriggerProps,
-} from '@radix-ui/react-tooltip'
+import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 
-import { displayName } from '@/lib/utils'
-import { cn } from '@/theme/utils'
+import { cn } from '@/lib/utils'
 
-const Tooltip = (props: TooltipProps) => (
-  <Provider>
-    <Root {...props} />
-  </Provider>
+const TooltipProvider = ({ delayDuration = 0, ...props }: React.ComponentProps<typeof TooltipPrimitive.Provider>) => (
+  <TooltipPrimitive.Provider data-slot="tooltip-provider" delayDuration={delayDuration} {...props} />
 )
-Tooltip.displayName = displayName('Tooltip')
 
-const TooltipContent = forwardRef<React.ComponentRef<typeof Content>, TooltipContentProps>(
-  ({ className, sideOffset = 4, ...props }, ref) => (
-    <Portal>
-      <Content
-        className={cn(`z-50 overflow-hidden rounded-sm bg-primary px-3 py-1.5 text-xs text-accent-foreground`, className)}
-        ref={ref}
-        sideOffset={sideOffset}
-        {...props}
-      />
-    </Portal>
-  ),
+const Tooltip = ({ ...props }: React.ComponentProps<typeof TooltipPrimitive.Root>) => (
+  <TooltipProvider>
+    <TooltipPrimitive.Root data-slot="tooltip" {...props} />
+  </TooltipProvider>
 )
-TooltipContent.displayName = displayName('TooltipContent')
 
-const TooltipTrigger = forwardRef<React.ComponentRef<typeof Trigger>, TooltipTriggerProps>(({ children, ...props }, ref) => (
-  <Trigger ref={ref} {...props}>
-    {children}
-  </Trigger>
-))
-TooltipTrigger.displayName = displayName('TooltipTrigger')
+const TooltipTrigger = ({ ...props }: React.ComponentProps<typeof TooltipPrimitive.Trigger>) => (
+  <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />
+)
 
-export { Tooltip, TooltipContent, TooltipTrigger, type TooltipProps, type TooltipContentProps, type TooltipTriggerProps }
+const TooltipContent = ({
+  children,
+  className,
+  sideOffset = 4,
+  ...props
+}: React.ComponentProps<typeof TooltipPrimitive.Content>) => (
+  <TooltipPrimitive.Portal>
+    <TooltipPrimitive.Content
+      className={cn(
+        'z-50 max-w-sm rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground animate-in fade-in-0 zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
+        className,
+      )}
+      data-slot="tooltip-content"
+      sideOffset={sideOffset}
+      {...props}
+    >
+      {children}
+      <TooltipPrimitive.Arrow className="z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px] bg-primary fill-primary" />
+    </TooltipPrimitive.Content>
+  </TooltipPrimitive.Portal>
+)
+
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }

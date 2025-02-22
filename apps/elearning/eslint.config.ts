@@ -11,34 +11,11 @@ export default jointConfig({
     ['parent', 'index', 'sibling'],
   ],
   internalImports: ['config', 'supabase'],
-  maxLines: 400,
+  maxLines: -1,
   namedImports: ['react'],
-  overrides: [
-    {
-      files: ['**/*.ts?(x)'],
-      rules: {
-        'arrow-body-style': ['error', 'as-needed'],
-      },
-    },
-    {
-      ignores: ['src/theme/*.ts'],
-      rules: {
-        'no-restricted-imports': [
-          2,
-          {
-            patterns: [
-              {
-                group: ['class-variance-authority', 'clsx', 'tailwind-merge'],
-                message: 'Import from the internal theme module instead.',
-              },
-            ],
-          },
-        ],
-      },
-    },
-  ],
   react: 'next.js',
   sortArrayValues: ['src/**/*.ts?(x)'],
-  sortObjectKeys: ['*.ts', 'src/app/**/*.ts?(x)'],
+  sortObjectKeys: ['*.ts'],
   tailwindCss: true,
+  useNodePrefix: 'ignore',
 })

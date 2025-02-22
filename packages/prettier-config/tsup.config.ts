@@ -9,7 +9,7 @@ export default defineConfig({
   minify: true,
   outDir: 'build',
   splitting: false,
-  esbuildOptions: (options) => {
+  esbuildOptions: options => {
     options.footer = {
       js: 'module.exports = module.exports.default;',
     }

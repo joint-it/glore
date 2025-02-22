@@ -1,6 +1,10 @@
 'use client'
 
-import { useCookie } from '@/hooks/use-cookies'
-import { Cookie } from '@/lib/storage'
+import { useLocale as useNextIntlLocale } from 'next-intl'
 
-export const useLocale = () => useCookie(Cookie.Locale)
+import { setLocale, type Locale } from '@/services/i18n'
+
+export const useLocale = () => {
+  const locale = useNextIntlLocale()
+  return [locale, setLocale] as [Locale, (locale: Locale) => Promise<void>]
+}

@@ -6,6 +6,14 @@ export type AnyObject = Record<string, any>
 
 export type AnyKey = string | number | symbol
 
+export type NonNullablePartial<T> = Partial<{
+  [K in keyof T]: NonNullable<T[K]>
+}>
+
+export type NullToUndefined<T> = {
+  [K in keyof T]: null extends T[K] ? NonNullable<T[K]> | undefined : T[K]
+}
+
 export interface Recursive<T> {
   [key: string]: Recursive<T> | T
 }

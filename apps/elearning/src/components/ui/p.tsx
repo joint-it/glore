@@ -1,9 +1,7 @@
 import { forwardRef, useMemo } from 'react'
 
-import { displayName } from '@/lib/utils'
 import { type VariantProps } from '@/theme/types'
 import { cn, cva } from '@/theme/utils'
-import { textColor, textSize } from '@/theme/variants'
 
 interface PProps extends Omit<React.HTMLAttributes<HTMLParagraphElement>, 'color'>, VariantProps<typeof p> {}
 
@@ -11,12 +9,16 @@ const P = forwardRef<HTMLParagraphElement, PProps>(({ className, color, ...props
   const styles = useMemo(() => p({ color }), [color])
   return <p className={cn(styles, className)} ref={ref} {...props} />
 })
-P.displayName = displayName('P')
 
-const p = cva([], {
+const p = cva('text-gray-900 dark:text-gray-50', {
   variants: {
-    color: textColor,
-    size: textSize,
+    color: {
+      failure: 'text-red-500 dark:text-red-400',
+      info: 'text-blue-500 dark:text-blue-400',
+      success: 'text-green-500 dark:text-green-400',
+      warning: 'text-yellow-500 dark:text-yellow-400',
+      gray: 'text-gray-500 dark:text-gray-400',
+    },
   },
 })
 

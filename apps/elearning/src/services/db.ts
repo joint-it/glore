@@ -1,44 +1,35 @@
-import { NextResponse, type NextRequest } from 'next/server'
+import { cookies } from 'next/headers'
 
-import { withDB } from '@/hooks/with-db'
+import { Env } from '@/lib/env'
+import { createServerClient } from '@supabase/ssr'
+import type { User } from '@supabase/supabase-js'
+import type { SupabaseAuthClient } from '@supabase/supabase-js/dist/module/lib/SupabaseAuthClient'
 import type { Database, Tables } from 'supabase/types'
 
-export { Database }
+export type { Database, User }
 
-export interface Profile extends Tables<'profiles'> {}
+export interface AuthClient extends SupabaseAuthClient {}
 
-export enum AuthPage {
-  Login = '/login',
-  Signup = '/signup',
-  ResetPassword = '/reset-password',
+export interface Profile extends Tables<'profiles'> {
+  name?: string
 }
 
-export const updateSession = async (request: NextRequest) => {
-  try {
-    let response = NextResponse.next({
-      request: {
-        headers: request.headers,
+export const getDB = async (
+  callback = () => {
+    /**/
+  },
+) => {
+  const cookieStore = await cookies()
+
+  return createServerClient<Database>(Env.SUPABASE_URL, Env.SUPABASE_ANON_KEY, {
+    cookies: {
+      getAll: () => cookieStore.getAll(),
+      setAll: cookies => {
+        for (const { name, options, value } of cookies) {
+          cookieStore.set(name, value, options)
+        }
+        callback()
       },
-    })
-
-    const db = await withDB(() => {
-      response = NextResponse.next({ request })
-    })
-
-    const { error } = await db.auth.getUser()
-
-    const isAuthPage = Object.values(AuthPage).includes(request.nextUrl.pathname as AuthPage)
-
-    if (error) {
-      return isAuthPage ? response : NextResponse.redirect(new URL('/login', request.url))
-    }
-
-    return isAuthPage ? NextResponse.redirect(new URL('/', request.url)) : response
-  } catch {
-    return NextResponse.next({
-      request: {
-        headers: request.headers,
-      },
-    })
-  }
+    },
+  })
 }

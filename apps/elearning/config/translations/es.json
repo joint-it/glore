@@ -16,5 +16,17 @@
     "userInvalid": "Email o username no válido",
     "userNotFound": "Usuario no encontrado",
     "userRequired": "Se requiere un email o username"
+  },
+  "Navigation": {
+    "dashboard": "Panel",
+    "modules": "Módulos",
+    "modulesCompleted": "Terminado",
+    "modulesInProgress": "En curso",
+    "modulesIntro": "Introducción",
+    "modulesNotStarted": "No comenzó",
+    "modulesSkills": "Habilidades",
+    "certificates": "Certificados",
+    "inbox": "Inbox",
+    "logout": "Cerrar sesión"
   }
 }

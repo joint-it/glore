@@ -16,7 +16,7 @@
       "default": "./build/tailwindcss.js"
     }
   },
-  "prettier": "./build/index.js",
+  "prettier": "./build/index.cjs",
   "scripts": {
     "build": "tsup",
     "build:watch": "tsup --watch",

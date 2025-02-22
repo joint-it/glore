@@ -1,33 +1,18 @@
-import { forwardRef, useMemo } from 'react'
+'use client'
 
-import { Label as LabelBase, type LabelProps as LabelBaseProps } from '@radix-ui/react-label'
+import * as LabelPrimitive from '@radix-ui/react-label'
 
-import { displayName } from '@/lib/utils'
-import { type VariantProps } from '@/theme/types'
-import { cn, cva } from '@/theme/utils'
-import { fontWeight, textColor, textSize } from '@/theme/variants'
+import { cn } from '@/lib/utils'
 
-interface LabelProps extends Omit<LabelBaseProps, 'color'>, VariantProps<typeof label> {}
-
-const Label = forwardRef<React.ComponentRef<typeof LabelBase>, LabelProps>(
-  ({ className, color, size, weight, ...props }, ref) => {
-    const styles = useMemo(() => label({ color, size, weight }), [color, size, weight])
-    return <LabelBase className={cn(styles, className)} ref={ref} {...props} />
-  },
+const Label = ({ className, ...props }: React.ComponentProps<typeof LabelPrimitive.Root>) => (
+  <LabelPrimitive.Root
+    className={cn(
+      'text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50',
+      className,
+    )}
+    data-slot="label"
+    {...props}
+  />
 )
-Label.displayName = displayName('Label')
 
-const label = cva(`inline-block cursor-pointer leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70`, {
-  defaultVariants: {
-    color: 'base',
-    size: 'sm',
-    weight: 'medium',
-  },
-  variants: {
-    color: textColor,
-    size: textSize,
-    weight: fontWeight,
-  },
-})
-
-export { Label, type LabelProps }
+export { Label }

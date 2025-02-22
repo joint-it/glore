@@ -42,6 +42,6 @@ export default {
       options: {
         printWidth: 200,
       },
-    }
+    },
   ],
 } satisfies Config

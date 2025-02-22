@@ -128,17 +128,20 @@ export const noRestrictedImportsOptions = (options: NoRestrictedImportOptions = 
 export const sortImportsOptions = (options: SortImportsOptions = {}) => {
   const { importGroups = [], internalImports = [], newlinesBetweenGroups, tsconfigRootDir } = options
 
-  const customGroups = importGroups.flat().reduce<SortImportGroup>((groups, group) => {
-    if (DEFAULT_IMPORT_GROUPS.includes(group)) return groups
+  const customGroups = importGroups.flat().reduce<SortImportGroup>(
+    (groups, group) => {
+      if (DEFAULT_IMPORT_GROUPS.includes(group)) return groups
 
-    const regexName = group.replace('*', '.*')
-    const patterns = [new RegExp(`^${regexName}$`), new RegExp(`^${regexName}/.*`)]
+      const regexName = group.replace('*', '.*')
+      const patterns = [new RegExp(`^${regexName}$`), new RegExp(`^${regexName}/.*`)]
 
-    return {
-      type: { ...groups.type, [group]: patterns },
-      value: { ...groups.value, [group]: patterns },
-    }
-  }, {} as SortImportGroup)
+      return {
+        type: { ...groups.type, [group]: patterns },
+        value: { ...groups.value, [group]: patterns },
+      }
+    },
+    { type: {}, value: {} } as SortImportGroup,
+  )
 
   return {
     customGroups: Object.keys(customGroups).length ? customGroups : undefined,

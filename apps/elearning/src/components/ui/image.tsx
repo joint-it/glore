@@ -5,8 +5,6 @@ import { type OnLoadingComplete, type PlaceholderValue, type StaticImport } from
 import NextImage from 'next/image'
 import { useMemo } from 'react'
 
-import { displayName } from '@/lib/utils'
-
 interface ImageProps
   extends Omit<
     React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>,
@@ -47,6 +45,5 @@ const Image = (props: ImageProps) => {
 
   return <NextImage alt={alt} height={0} sizes={sizes} style={styles} width={0} {...rest} />
 }
-Image.displayName = displayName('Image')
 
 export { Image, type ImageProps }
