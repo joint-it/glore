@@ -15,11 +15,11 @@ Visit the website to find out how to sign up to the e-learning platform and get 
 
 The GloRe eLearning platform is a monorepository including a <a href="https://nextjs.org">Next.js</a> application backed by <a href="https://supabase.com">Supabase</a> and different utility packages.
 
-The project uses <a href="https://tailwindcss.com">Tailwind CSS</a> to create a responsive and accessible user interface.
+The project uses <a href="https://tailwindcss.com">Tailwind CSS</a> and <a href="https://ui.shadcn.com">shadcn/ui</a> components for building a responsive and accessible user interface.
 
 ## Development
 
-If you want to run the project locally, follow the instructions below to set up your development environment.
+If you want to run the project locally, follow the instructions below to set up a development environment.
 
 ### Prerequisites
 
@@ -87,4 +87,4 @@ pnpm release
 
 ## License
 
-[MIT](LICENSE) © [Joint](https://associazionejoint.org)
+[MIT](LICENSE) © [Associazione Joint](https://associazionejoint.org)
