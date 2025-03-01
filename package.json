@@ -47,7 +47,7 @@
     "prettier": "catalog:",
     "release-it": "^18.1.2",
     "shellcheck": "catalog:",
-    "turbo": "^2.4.3",
+    "turbo": "^2.4.4",
     "typescript": "catalog:"
   },
   "release-it": {
